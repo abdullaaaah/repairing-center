@@ -59,4 +59,52 @@ class Repair extends Model
 
     }
 
+    public static function getPendingRepairs($repairs_array)
+    {
+
+      return array_filter(iterator_to_array($repairs_array), function($repair)
+      {
+
+        if( !$repair->is_accepted )
+        {
+          return true;
+        }
+
+      });
+
+    }
+
+    public static function getAcceptedRepairs($repairs_array)
+    {
+
+      return array_filter(iterator_to_array($repairs_array), function($repair)
+      {
+
+        if( $repair->is_accepted && !$repair->is_completed )
+        {
+          return true;
+        }
+
+      });
+
+    }
+
+    public static function getCompletedRepairs($repairs_array)
+    {
+
+      return array_filter(iterator_to_array($repairs_array), function($repair)
+      {
+
+        if( $repair->is_completed )
+        {
+          return true;
+        }
+
+      });
+
+    }
+
+
+
+
 }

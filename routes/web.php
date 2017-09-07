@@ -115,11 +115,11 @@ Route::post('/admin/inventory/phones', 'AdminController@storePhone');
 
 Route::get('/admin/manage', 'AdminController@manage')->name('manage-admin');
 
-Route::get('/admin/manage/{country}/new', 'AdminController@indexRepairs')->name('new-repairs');
+Route::get('/admin/manage/{country}/pending', 'AdminRepairsController@showPendingRepairs')->name('new-repairs');
 
-Route::get('/admin/manage/{country}/ongoing', 'AdminController@indexOngoingRepairs')->name('ongoing-repairs');
+Route::get('/admin/manage/{country}/ongoing', 'AdminRepairsController@showAcceptedRepairs')->name('ongoing-repairs');
 
-Route::get('/admin/manage/{country}/completed', 'AdminController@indexCompletedRepairs')->name('completed-repairs');
+Route::get('/admin/manage/{country}/completed', 'AdminRepairsController@showCompletedRepairs')->name('completed-repairs');
 
 Route::get('/admin/manage/repair/{repair}', 'AdminController@showRepair');
 

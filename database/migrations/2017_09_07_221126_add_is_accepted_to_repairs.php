@@ -14,7 +14,8 @@ class AddIsAcceptedToRepairs extends Migration
     public function up()
     {
         Schema::table('repairs', function (Blueprint $table) {
-            $table->boolean('is_accepted')->default(false);
+            $table->boolean('is_accepted')->default(false)->after('id');
+            $table->boolean('is_completed')->default(false)->after('is_accepted');
         });
     }
 
@@ -27,6 +28,7 @@ class AddIsAcceptedToRepairs extends Migration
     {
         Schema::table('repairs', function (Blueprint $table) {
             $table->dropColumn('is_accepted');
+            $table->dropColumn('is_completed');
         });
     }
 }

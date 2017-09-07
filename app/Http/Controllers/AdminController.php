@@ -235,33 +235,6 @@ class AdminController extends Controller
       ]);
     }
 
-    public function indexRepairs($country)
-    {
-
-      $repairs = \App\Country::findByName($country)->repairs;
-
-      //only newly reserved repairs
-
-      $repairs = array_filter(iterator_to_array($repairs), function($repair)
-      {
-        if( count($repair->trackings) == 1 )
-        {
-          return true;
-        }
-
-      });
-
-
-      return view('admin.manage.all', [
-
-        'is_page_active' => PagesController::isPageActive('manage'),
-        'page_title' => 'Manage',
-        'repairs' => $repairs,
-        'type' => "newly reserved",
-        'country' => $country
-
-      ]);
-    }
 
     public function showRepair(\App\Repair $repair)
     {
@@ -297,55 +270,6 @@ class AdminController extends Controller
 
     }
 
-    public function indexOngoingRepairs($country)
-    {
-
-      $repairs = \App\Country::findByName($country)->repairs;
-
-      $repairs = array_filter(iterator_to_array($repairs), function($repair)
-      {
-        if( count($repair->trackings) > 1 )
-        {
-          return !\App\Tracking::isComplete($repair->trackings->last()->status);
-        }
-
-      });
-
-      return view('admin.manage.all', [
-
-        'is_page_active' => PagesController::isPageActive('manage'),
-        'page_title' => 'Manage',
-        'country' => $country,
-        'repairs' => $repairs,
-        'type' => "on going"
-
-      ]);
-    }
-
-    public function indexCompletedRepairs($country)
-    {
-
-      $repairs = \App\Country::findByName($country)->repairs;
-
-      $repairs = array_filter(iterator_to_array($repairs), function($repair)
-      {
-        if( count($repair->trackings) )
-        {
-          return \App\Tracking::isComplete($repair->trackings->last()->status);
-        }
-
-      });
-
-      return view('admin.manage.all', [
-
-        'is_page_active' => PagesController::isPageActive('manage'),
-        'page_title' => 'Manage',
-        'country' => $country,
-        'repairs' => $repairs,
-        'type' => "completed"
-
-      ]);
-    }
 
     //pricing
 
