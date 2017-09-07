@@ -1,0 +1,531 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+
+class AdminController extends Controller
+{
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
+    public function home()
+    {
+
+      $total_bookings = count(\App\Repair::all());
+      $total_phones = count(\App\Phone::all());
+      $payment_count = count(\App\Payment::all());
+
+      $attention = [];
+
+      //cities without any payment methods
+
+      $cities_without_payment = \App\City::where([
+        ['supports_cod', '=', false],
+        ['supports_paypal', '=', false]
+        ])->get();
+
+      if(count($cities_without_payment))
+      {
+        $attention['cities_without_payment'] = $cities_without_payment;
+      }
+
+      //bookings with due payments
+
+      $bookings_due_payments = \App\Repair::all();
+
+      array_filter(iterator_to_array($bookings_due_payments), function($booking) {
+
+        $stat = $booking->trackings->last();
+
+        if($stat)
+        {
+          if($stat->status > 7)
+          {
+            return true;
+          }
+        }
+
+      });
+
+      if(count($bookings_due_payments))
+      {
+        $attention['bookings_due_payments'] = $bookings_due_payments;
+      }
+
+      //Phones with no quotes
+
+      $phones_with_no_quotes = \App\Phone::all();
+
+      $phones_with_no_quotes = array_filter(iterator_to_array($phones_with_no_quotes), function($phone) {
+
+        $quotes = $phone->quotes;
+
+        if(isset($quotes))
+        {
+
+          if(count($quotes) < 2)
+          {
+
+            return true;
+
+          } else {
+
+            return false;
+
+          }
+
+        } else {
+          return false;
+        }
+
+      });
+
+      if(count($phones_with_no_quotes))
+      {
+        $attention['phones_with_no_quotes'] = $phones_with_no_quotes;
+      }
+
+      //delegate
+
+      $data = compact('total_bookings', 'total_phones', 'payment_count', 'attention');
+
+      $params = [
+        'is_page_active' => PagesController::isPageActive('admin_home'),
+        'page_title' => 'Home'
+      ];
+
+      return view('admin.home', array_merge($data, $params));
+    }
+
+    public function inventory()
+    {
+
+      return view('admin.inventory', [
+
+        'is_page_active' => PagesController::isPageActive('inventory'),
+        'page_title' => 'Inventory'
+
+      ]);
+    }
+
+    public function brand_index()
+    {
+
+      $brands = \App\PhoneMake::all();
+
+      return view('admin.inventory.brands', [
+
+        'is_page_active' => PagesController::isPageActive('inventory'),
+        'page_title' => 'Brands',
+        'brands' => $brands
+
+      ]);
+    }
+
+    public function phoneMake(\App\PhoneMake $phoneMake)
+    {
+
+      $phones = $phoneMake->phones;
+
+      return view('admin.inventory.phones', [
+
+        'is_page_active' => PagesController::isPageActive('inventory'),
+        'page_title' => 'Phones',
+        'phones' => $phones,
+        'brand' => $phoneMake->id
+
+      ]);
+    }
+
+    public function deletePhone(\App\Phone $phone)
+    {
+      $phone->delete();
+
+      return redirect("/admin/inventory/brand/" . $phone->phoneMake->id);
+    }
+
+    public function createVariation(\App\Phone $phone)
+    {
+
+      return view('admin.inventory.variations', [
+
+        'is_page_active' => PagesController::isPageActive('inventory'),
+        'page_title' => 'Variations',
+        'phone' => $phone,
+
+      ]);
+
+    }
+
+    public function deleteVariation(\App\Variation $variation)
+    {
+
+      $variation->delete();
+
+      return redirect("/admin/inventory/phone/" . $variation->phone->id);
+    }
+
+    public function storeVariation()
+    {
+
+      $this->validate(request(), [
+        'color' => 'required',
+        'capacity' => 'required|numeric'
+      ]);
+
+      \App\Variation::create( request()->all() );
+
+      return redirect("/admin/inventory/phone/" . request()->phone_id);
+
+    }
+
+    public function createPhone()
+    {
+
+      $brands = \App\PhoneMake::all();
+
+      return view('admin.inventory.create_phone', [
+
+        'is_page_active' => PagesController::isPageActive('inventory'),
+        'page_title' => "Add Phone",
+        'brands' => $brands
+
+      ]);
+    }
+
+    public function storePhone()
+    {
+
+      $this->validate(request(), [
+
+        'phone_model_id' => 'required',
+        'model' => 'required'
+
+      ]);
+
+      $phone = \App\Phone::create(request(['phone_model_id', 'model']));
+
+      //create a default variation
+
+      \App\Variation::create([
+        'phone_id' => $phone->id,
+        'color' => 'DO NOT DELETE THIS',
+        'capacity' => 0
+      ]);
+
+      return redirect('/admin/inventory/brand/'. request()->phone_model_id);
+
+    }
+
+    //manage
+
+    public function manage()
+    {
+      return view('admin.manage', [
+
+        'is_page_active' => PagesController::isPageActive('manage'),
+        'page_title' => 'Manage'
+
+      ]);
+    }
+
+    public function indexRepairs($country)
+    {
+
+      $repairs = \App\Country::findByName($country)->repairs;
+
+      //only newly reserved repairs
+
+      $repairs = array_filter(iterator_to_array($repairs), function($repair)
+      {
+        if( count($repair->trackings) == 1 )
+        {
+          return true;
+        }
+
+      });
+
+
+      return view('admin.manage.all', [
+
+        'is_page_active' => PagesController::isPageActive('manage'),
+        'page_title' => 'Manage',
+        'repairs' => $repairs,
+        'type' => "newly reserved",
+        'country' => $country
+
+      ]);
+    }
+
+    public function showRepair(\App\Repair $repair)
+    {
+      if($repair->trackings->last())
+      {
+        $currentStat = \App\Tracking::status( $repair->trackings->last() );
+      } else {
+        $currentStat = "Reserved.";
+      }
+
+      if($repair->variation->color = "DO NOT DELETE THIS")
+      {
+        $repair->variation->color = "No variation selected";
+      }
+
+      return view('admin.manage.repair', [
+
+        'is_page_active' => PagesController::isPageActive('manage'),
+        'page_title' => 'Manage',
+        'repair' => $repair,
+        'currentStat' => $currentStat,
+        'statuses' => \App\Tracking::getStatuses()
+      ]);
+
+    }
+
+    public function storeTrackings()
+    {
+
+      \App\Tracking::create(request()->all());
+
+      return redirect('/admin/manage/repair/' . request()->repair_id);
+
+    }
+
+    public function indexOngoingRepairs($country)
+    {
+
+      $repairs = \App\Country::findByName($country)->repairs;
+
+      $repairs = array_filter(iterator_to_array($repairs), function($repair)
+      {
+        if( count($repair->trackings) > 1 )
+        {
+          return !\App\Tracking::isComplete($repair->trackings->last()->status);
+        }
+
+      });
+
+      return view('admin.manage.all', [
+
+        'is_page_active' => PagesController::isPageActive('manage'),
+        'page_title' => 'Manage',
+        'country' => $country,
+        'repairs' => $repairs,
+        'type' => "on going"
+
+      ]);
+    }
+
+    public function indexCompletedRepairs($country)
+    {
+
+      $repairs = \App\Country::findByName($country)->repairs;
+
+      $repairs = array_filter(iterator_to_array($repairs), function($repair)
+      {
+        if( count($repair->trackings) )
+        {
+          return \App\Tracking::isComplete($repair->trackings->last()->status);
+        }
+
+      });
+
+      return view('admin.manage.all', [
+
+        'is_page_active' => PagesController::isPageActive('manage'),
+        'page_title' => 'Manage',
+        'country' => $country,
+        'repairs' => $repairs,
+        'type' => "completed"
+
+      ]);
+    }
+
+    //pricing
+
+    public function quotes(\App\Phone $phone)
+    {
+
+      $uk_quote = $phone->quotes->where('country_code','=', 'UK')->last();
+
+      if(isset($uk_quote))
+      {
+        $uk_quote = \App\Quote::formatQuote( $uk_quote->country_code, $uk_quote->price  );
+      }
+
+
+      $uae_quote = $phone->quotes->where('country_code', '=', 'UAE')->last();
+
+      if(isset($uae_quote))
+      {
+        $uae_quote = \App\Quote::formatQuote( $uae_quote->country_code, $uae_quote->price );
+      }
+
+
+      $data = compact('phone','quote_exists', 'uae_quote', 'uk_quote');
+
+      $params = [
+        'is_page_active' => PagesController::isPageActive('manage'),
+        'page_title' => "Pricing"
+      ];
+
+      return view('admin.inventory.pricing', array_merge($data, $params));
+
+    }
+
+    public function storeQuote()
+    {
+
+      $this->validate(request(), [
+        'price' => 'required|numeric',
+        'country_code' => 'required'
+      ]);
+
+      \App\Quote::create(request()->all());
+
+      return redirect('/admin/inventory/quotes/phone/' . request()->phone_id);
+
+    }
+
+    //location
+
+    public function indexLocation()
+    {
+
+      $countries = \App\Country::all();
+
+      $data = [];
+
+      $data = compact('countries');
+
+      $params = [
+        'is_page_active' => PagesController::isPageActive('location'),
+        'page_title' => "Manage Locations"
+      ];
+
+      return view('admin.location', array_merge($data, $params));
+
+    }
+
+    public function viewCountry(\App\Country $country)
+    {
+      $data = [];
+
+      $country_id = $country->id;
+
+      $cities = $country->cities;
+
+      $data = compact('country', 'cities', 'country_id');
+
+      $params = [
+        'is_page_active' => PagesController::isPageActive('location'),
+        'page_title' => "Manage Country"
+      ];
+
+      return view('admin.location.country', array_merge($data, $params));
+
+    }
+
+    public function storeCity()
+    {
+
+      $this->validate(request(), [
+
+        'name' => 'required',
+        'supports_paypal' => 'required',
+        'supports_cod' => 'required'
+
+      ]);
+
+      \App\City::create(request()->all());
+
+      return redirect(route('manage-country', request()->country_id));
+
+    }
+
+    public function deleteCity(\App\City $city)
+    {
+
+      $city->delete();
+
+      return redirect(route('manage-country', $city->country->id));
+
+    }
+
+    public function editCity(\App\City $city)
+    {
+      $this->validate(request(), [
+        'name' => 'required'
+      ]);
+
+      $city->update(request()->all());
+      return redirect(route('manage-country', $city->country->id));
+
+    }
+
+    public function getJsonCities(\App\Country $country)
+    {
+      return $country->cities;
+    }
+
+    public function settings(\App\User $user, $success = false)
+    {
+
+      $success = request()->success;
+
+      $email = \Auth::user()->email;
+
+      $data = compact('email', 'success');
+
+      $params = [
+        'is_page_active' => PagesController::isPageActive('settings'),
+        'page_title' => "Settings"
+      ];
+
+      return view('admin.settings', array_merge($data, $params));
+
+    }
+
+    public function editPassword()
+    {
+
+      $this->validate(request(), [
+        'password' => 'required|min:6'
+      ]);
+
+      \Auth::user()->password = bcrypt(request()->password);
+
+      \Auth::user()->save();
+
+      return redirect()->action(
+        'AdminController@settings', ['user' => null, 'success' => true]
+      );
+
+    }
+
+    public function editEmail()
+    {
+
+      $this->validate(request(), [
+        'email' => 'email|min:2|required|unique:users'
+      ]);
+
+      \Auth::user()->email = request()->email;
+
+      \Auth::user()->save();
+
+      return redirect()->action(
+        'AdminController@settings', ['user' => null, 'success' => true]
+      );
+
+
+    }
+
+
+}

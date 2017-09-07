@@ -1,0 +1,90 @@
+.inventory-box {
+  background-color:#179eed;
+  color:White;
+  height:16rem;
+  width:100%;
+  font-size: 20px;
+  padding:20px;
+  margin-bottom:20px;
+  font-weight:700;
+  text-align: center;
+  padding-top:6.5rem;
+}
+
+.inventory-box:hover {
+  background-color:#179eed;
+  font-size:1.7rem;
+  font-weight:900;
+}
+
+h4 
+{
+  font-weight:900;
+  margin-top:20px;
+  margin-bottom:20px;
+}
+
+.h1 
+{
+  font-weight:900;
+  font-size:3rem;
+  margin-top:40px;
+  margin-bottom:0px;
+}
+
+#manage-repairs-page .h1, #manage-repairs-page-page .h1
+{
+  margin-bottom:36px;
+}
+
+.table-custom thead
+{
+  background-color: #179eed;
+  color:white;
+}
+
+.table-custom thead th 
+{
+  text-align: center;
+  font-weight:700;
+}
+
+
+.table-custom tbody tr
+{
+  background-color:#dcdcdc;
+  font-size:15px;
+  text-align: center;
+}
+
+.table-custom tbody tr:hover
+{
+  background-color:silver;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+#manage-repairs-page-page .table-custom th:first-of-type, 
+.table-two-col th:first-of-type
+{ 
+  background-color: #179EED;
+  color:white;
+  width:25%;
+}
+
+
+
+#manage-repairs-page-page .table-custom td:first-of-type ,
+.table-two-col td:first-of-type
+{
+  text-align: center;
+  width:75%;
+}
+
+.btn-custom
+{
+  height:45px;
+  font-weight:700;
+  width:100%;
+  margin-top:20px;
+}
