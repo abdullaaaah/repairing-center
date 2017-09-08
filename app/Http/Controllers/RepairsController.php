@@ -193,6 +193,9 @@ class RepairsController extends Controller
 
    $repair = Repair::create($everything);
 
+   $repair->booking_reference = Repair::generateBookingReference($repair);
+   $repair->save();
+
     \App\Tracking::create([
       'status' => 1,
       'repair_id' => $repair->id

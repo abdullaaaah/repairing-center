@@ -37,7 +37,7 @@
   <tr>
 
     <td>
-      Test 101
+      {{$booking->booking_reference}}
     </td>
 
     <td>

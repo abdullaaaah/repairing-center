@@ -196,6 +196,26 @@ class Repair extends Model
       }
     }
 
+    public static function generateBookingReference($repair)
+    {
+      //RC44001 (RC for repair center website, 44 for country and than 001 is job id ) so its easy to recoginise.
+      //MR971001 (MR for mobilerepair.ae website, 971 for country and than 001 is job id )
+      $reference = "";
+
+      if($repair->country_id==1)
+      {
+        $reference = "RC4400" . $repair->id;
+      }
+
+      if($repair->country_code==2)
+      {
+        $reference = "MR97100" . $repair->id;
+      }
+
+      return $reference;
+
+    }
+
 
 
 }
