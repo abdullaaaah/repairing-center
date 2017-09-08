@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use \App\Repair;
+use \App\Phone;
+use \App\Payment;
+use \App\City;
 
 class AdminController extends Controller
 {
@@ -17,76 +21,24 @@ class AdminController extends Controller
     public function home()
     {
 
-      $total_bookings = count(\App\Repair::all());
-      $total_phones = count(\App\Phone::all());
-      $payment_count = count(\App\Payment::all());
+      $total_bookings = count( Repair::all() );
+      $total_phones = count( Phone::all() );
+      $payment_count = count( Payment::all() );
 
       $attention = [];
 
       //cities without any payment methods
+      $cities_without_payment = City::withoutPaymentMethods();
 
-      $cities_without_payment = \App\City::where([
-        ['supports_cod', '=', false],
-        ['supports_paypal', '=', false]
-        ])->get();
-
-      if(count($cities_without_payment))
+      if($cities_without_payment)
       {
         $attention['cities_without_payment'] = $cities_without_payment;
       }
 
-      //bookings with due payments
-
-      $bookings_due_payments = \App\Repair::all();
-
-      array_filter(iterator_to_array($bookings_due_payments), function($booking) {
-
-        $stat = $booking->trackings->last();
-
-        if($stat)
-        {
-          if($stat->status > 7)
-          {
-            return true;
-          }
-        }
-
-      });
-
-      if(count($bookings_due_payments))
-      {
-        $attention['bookings_due_payments'] = $bookings_due_payments;
-      }
-
       //Phones with no quotes
+      $phones_with_no_quotes = Phone::withoutQuotes();
 
-      $phones_with_no_quotes = \App\Phone::all();
-
-      $phones_with_no_quotes = array_filter(iterator_to_array($phones_with_no_quotes), function($phone) {
-
-        $quotes = $phone->quotes;
-
-        if(isset($quotes))
-        {
-
-          if(count($quotes) < 2)
-          {
-
-            return true;
-
-          } else {
-
-            return false;
-
-          }
-
-        } else {
-          return false;
-        }
-
-      });
-
-      if(count($phones_with_no_quotes))
+      if($phones_with_no_quotes)
       {
         $attention['phones_with_no_quotes'] = $phones_with_no_quotes;
       }

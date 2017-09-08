@@ -69,4 +69,37 @@ class Phone extends Model
 
   }
 
+  public static function withoutQuotes()
+  {
+
+    $phones = static::all();
+    $phones = array_filter(iterator_to_array($phones), function($phone) {
+
+      $quotes = $phone->quotes;
+
+      if(isset($quotes))
+      {
+
+        if(count($quotes) < 2)
+        {
+          return true;
+        } else {
+          return false;
+        }
+
+      } else {
+        return false;
+      }
+
+    });
+
+    if ( count($phones) )
+    {
+      return $phones;
+    } else {
+      return false;
+    }
+
+  }
+
 }

@@ -27,4 +27,19 @@ class City extends Model
       return $this->hasMany('App\Repair', 'city_id');
     }
 
+    public static function withoutPaymentMethods()
+    {
+      $cities = \App\City::where([
+        ['supports_cod', '=', false],
+        ['supports_paypal', '=', false]
+        ])->get();
+
+      if( count($cities) )
+      {
+        return $cities;
+      } else {
+        return false;
+      }
+    }
+
 }
