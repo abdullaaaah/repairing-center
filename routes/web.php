@@ -144,11 +144,11 @@ Route::get('/admin/location/manage', 'AdminLocationsController@index')->name('ma
 
 Route::get('/admin/location/country/{country}', 'AdminLocationsController@showCountry')->name('manage-country');
 
-Route::post('/admin/location/cities', 'AdminLocationController@storeCity')->name('store-city');
+Route::post('/admin/location/cities', 'AdminLocationsController@storeCity')->name('store-city');
 
-Route::delete('/admin/location/city/{city}', 'AdminLocationController@deleteCity')->name('delete-city');
+Route::delete('/admin/location/city/{city}', 'AdminLocationsController@deleteCity')->name('delete-city');
 
-Route::patch('/admin/location/city/{city}', 'AdminLocationController@editCity')->name('edit-city');
+Route::patch('/admin/location/city/{city}', 'AdminLocationsController@editCity')->name('edit-city');
 
 Route::get('/country/{country}/cities', 'AdminLocationsController@getJsonCities');
 

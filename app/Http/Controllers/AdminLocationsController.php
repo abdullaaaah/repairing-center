@@ -36,7 +36,7 @@ class AdminLocationsController extends Controller
 
       $country_id = $country->id;
 
-      $cities = $country->cities;
+      $cities = City::getCitiesAlpha($country_id);
 
       $data = compact('country', 'cities', 'country_id');
 
@@ -88,7 +88,7 @@ class AdminLocationsController extends Controller
 
     public function getJsonCities(Country $country)
     {
-      return $country->cities;
+      return City::getCitiesAlpha($country->id);
     }
 
 }

@@ -42,4 +42,9 @@ class City extends Model
       }
     }
 
+    public static function getCitiesAlpha($country_id)
+    {
+      return City::where('country_id', '=', $country_id)->orderBy('name', 'ASC')->get();
+    }
+
 }
