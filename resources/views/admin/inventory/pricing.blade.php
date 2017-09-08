@@ -20,13 +20,13 @@
     <tr>
       <td>UK</td>
       <td>LCD Replacement</td>
-      <td>{{ $uk_quote ? $uk_quote : "Not set." }}</td>
+      <td>{{ $ukQuote }}</td>
     </tr>
 
     <tr>
       <td>UAE</td>
       <td>LCD Replacement</td>
-      <td>{{ $uae_quote ? $uae_quote : "Not set." }}</td>
+      <td>{{ $uaeQuote }}</td>
     </tr>
   </tbody>
 

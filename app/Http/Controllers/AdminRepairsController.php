@@ -75,7 +75,7 @@ class AdminRepairsController extends Controller
 
     }
 
-    public function showRepair(Repair $repair)
+    public function show(Repair $repair)
     {
 
       $currentStat = Repair::getRepairStatus($repair);

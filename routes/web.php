@@ -124,30 +124,31 @@ Route::get('/admin/manage/{country}/ongoing', 'AdminRepairsController@showAccept
 
 Route::get('/admin/manage/{country}/completed', 'AdminRepairsController@showCompletedRepairs')->name('completed-repairs');
 
-Route::get('/admin/manage/repair/{repair}', 'AdminRepairsController@showRepair');
+Route::get('/admin/manage/repair/{repair}', 'AdminRepairsController@show');
 
-Route::post('/admin/trackings', 'AdminController@storeTrackings');
+//trackings
 
+Route::post('/admin/trackings', 'AdminTrackingsController@store');
 
 //pricing
 
-Route::get('/admin/inventory/quotes/phone/{phone}', 'AdminController@quotes')->name('manage-pricing');
+Route::get('/admin/inventory/quotes/phone/{phone}', 'AdminQuotesController@index')->name('manage-pricing');
 
-Route::post('/admin/inventory/quotes', 'AdminController@storeQuote');
+Route::post('/admin/inventory/quotes', 'AdminQuotesController@store');
 
 //location
 
-Route::get('/admin/location/manage', 'AdminController@indexLocation')->name('manage-location');
+Route::get('/admin/location/manage', 'AdminLocationsController@index')->name('manage-location');
 
-Route::get('/admin/location/country/{country}', 'AdminController@viewCountry')->name('manage-country');
+Route::get('/admin/location/country/{country}', 'AdminLocationsController@showCountry')->name('manage-country');
 
-Route::post('/admin/location/cities', 'AdminController@storeCity')->name('store-city');
+Route::post('/admin/location/cities', 'AdminLocationController@storeCity')->name('store-city');
 
-Route::delete('/admin/location/city/{city}', 'AdminController@deleteCity')->name('delete-city');
+Route::delete('/admin/location/city/{city}', 'AdminLocationController@deleteCity')->name('delete-city');
 
-Route::patch('/admin/location/city/{city}', 'AdminController@editCity')->name('edit-city');
+Route::patch('/admin/location/city/{city}', 'AdminLocationController@editCity')->name('edit-city');
 
-Route::get('/country/{country}/cities', 'RepairsController@getJsonCities');
+Route::get('/country/{country}/cities', 'RepairsLocationController@getJsonCities');
 
 //paypal routes
 

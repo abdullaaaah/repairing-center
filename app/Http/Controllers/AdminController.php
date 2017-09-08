@@ -115,7 +115,7 @@ class AdminController extends Controller
 
     }
 
-    //manage
+    //manage bookings
 
     public function manage()
     {
@@ -127,142 +127,7 @@ class AdminController extends Controller
       ]);
     }
 
-    public function storeTrackings()
-    {
 
-      \App\Tracking::create(request()->all());
-
-      return redirect('/admin/manage/repair/' . request()->repair_id);
-
-    }
-
-
-    //pricing
-
-    public function quotes(\App\Phone $phone)
-    {
-
-      $uk_quote = $phone->quotes->where('country_code','=', 'UK')->last();
-
-      if(isset($uk_quote))
-      {
-        $uk_quote = \App\Quote::formatQuote( $uk_quote->country_code, $uk_quote->price  );
-      }
-
-
-      $uae_quote = $phone->quotes->where('country_code', '=', 'UAE')->last();
-
-      if(isset($uae_quote))
-      {
-        $uae_quote = \App\Quote::formatQuote( $uae_quote->country_code, $uae_quote->price );
-      }
-
-
-      $data = compact('phone','quote_exists', 'uae_quote', 'uk_quote');
-
-      $params = [
-        'is_page_active' => PagesController::isPageActive('manage'),
-        'page_title' => "Pricing"
-      ];
-
-      return view('admin.inventory.pricing', array_merge($data, $params));
-
-    }
-
-    public function storeQuote()
-    {
-
-      $this->validate(request(), [
-        'price' => 'required|numeric',
-        'country_code' => 'required'
-      ]);
-
-      \App\Quote::create(request()->all());
-
-      return redirect('/admin/inventory/quotes/phone/' . request()->phone_id);
-
-    }
-
-    //location
-
-    public function indexLocation()
-    {
-
-      $countries = \App\Country::all();
-
-      $data = [];
-
-      $data = compact('countries');
-
-      $params = [
-        'is_page_active' => PagesController::isPageActive('location'),
-        'page_title' => "Manage Locations"
-      ];
-
-      return view('admin.location', array_merge($data, $params));
-
-    }
-
-    public function viewCountry(\App\Country $country)
-    {
-      $data = [];
-
-      $country_id = $country->id;
-
-      $cities = $country->cities;
-
-      $data = compact('country', 'cities', 'country_id');
-
-      $params = [
-        'is_page_active' => PagesController::isPageActive('location'),
-        'page_title' => "Manage Country"
-      ];
-
-      return view('admin.location.country', array_merge($data, $params));
-
-    }
-
-    public function storeCity()
-    {
-
-      $this->validate(request(), [
-
-        'name' => 'required',
-        'supports_paypal' => 'required',
-        'supports_cod' => 'required'
-
-      ]);
-
-      \App\City::create(request()->all());
-
-      return redirect(route('manage-country', request()->country_id));
-
-    }
-
-    public function deleteCity(\App\City $city)
-    {
-
-      $city->delete();
-
-      return redirect(route('manage-country', $city->country->id));
-
-    }
-
-    public function editCity(\App\City $city)
-    {
-      $this->validate(request(), [
-        'name' => 'required'
-      ]);
-
-      $city->update(request()->all());
-      return redirect(route('manage-country', $city->country->id));
-
-    }
-
-    public function getJsonCities(\App\Country $country)
-    {
-      return $country->cities;
-    }
 
     public function settings(\App\User $user, $success = false)
     {

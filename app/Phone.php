@@ -55,4 +55,18 @@ class Phone extends Model
     }
   }
 
+  public function getQuote($country_code)
+  {
+
+    $quote = $this->quotes->where('country_code','=', $country_code)->last();
+
+    if(isset($quote))
+    {
+      return Quote::formatQuote( $quote->country_code, $quote->price  );
+    } else {
+      return "Not found.";
+    }
+
+  }
+
 }
