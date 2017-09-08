@@ -45,4 +45,14 @@ class Phone extends Model
 
   }
 
+  public static function getFormattedPhone($phone)
+  {
+    if($phone)
+    {
+      return strtoupper($phone->model);
+    } else {
+      return "Error, Phone not found";
+    }
+  }
+
 }

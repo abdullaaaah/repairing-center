@@ -8,6 +8,12 @@ use \App\Repair;
 
 use \App\Country;
 
+use \App\Variation;
+
+use \App\Tracking;
+
+use \App\Phone;
+
 
 class AdminRepairsController extends Controller
 {
@@ -68,6 +74,30 @@ class AdminRepairsController extends Controller
       return view('admin.manage.all', $data);
 
     }
+
+    public function showRepair(Repair $repair)
+    {
+
+      $currentStat = Repair::getRepairStatus($repair);
+
+      $variation = Variation::getFormattedVariation($repair->variation);
+
+      $trackingStatuses = Tracking::getStatuses();
+
+      $phone = Phone::getFormattedPhone( Phone::find($repair->phone_id) );
+
+      //page information
+
+      $is_page_active = PagesController::isPageActive('manage');
+
+      $page_title = 'Booking Details';
+
+      $data = compact('repair', 'currentStat', 'variation', 'trackingStatuses', 'is_page_active', 'page_title', 'phone');
+
+      return view('admin.manage.repair', $data);
+
+    }
+
 
 
 

@@ -25,9 +25,7 @@ class Tracking extends Model
 
   public function repair()
   {
-
     return $this->belongsTo('\App\Repair', 'repair_id');
-
   }
 
   public static function getStatuses()

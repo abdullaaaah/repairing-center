@@ -22,25 +22,20 @@
           <th>PHONE</th>
 
           <td>
-
-
-            {{ strtoupper(\App\Phone::find($repair->phone_id) ? \App\Phone::find($repair->variation->phone->id)->phoneMake->phone_model : "Deleted") }}
-            {{ strtoupper($repair->variation->phone ? $repair->variation->phone->model : "deleted") }},
-            {{ strtoupper($repair->variation->color) }}, {{ $repair->variation->capacity }} GB
-
+            {{ $phone }}, {{$variation}}
           </td>
         </tr>
 
         <tr>
           <th>MODEL NUMBER</th>
 
-          <td>{{ isset($repair->model_number) ? $repair->model_number : "Not provided." }}</td>
+          <td>{{ $repair->getModelNo() }}</td>
         </tr>
 
         <tr>
           <th>DESCRIPTION</th>
 
-          <td>{{ isset($repair->description) ? $repair->description : "Not provided." }}</td>
+          <td>{{ $repair->getDescription() }}</td>
         </tr>
       </tbody>
     </table>
@@ -108,13 +103,13 @@
         <tr>
           <th>QUOTE</th>
 
-          <td>{{ \App\Quote::formatQuote($repair->quote->country_code, $repair->quote->price) }}</td>
+          <td>{{ $repair->getPaymentAmount() }}</td>
         </tr>
 
         <tr>
           <th>STATUS</th>
 
-          <td>{{ $repair->payment_id ? "PAID" : "DUE"}}</td>
+          <td>{{ $repair->isPaid() }}</td>
         </tr>
 
       </tbody>
@@ -130,7 +125,7 @@
 
           <th>CURRENT STATUS</th>
 
-          <td><strong>{{ $currentStat }}</strong></td>
+          <td><strong>{{ $repair->getTrackingStatus() }}</strong></td>
 
         </tr>
 
@@ -155,8 +150,8 @@
         <label for="status">Select a tracking status.</label>
 
         <select name="status" class="form-control" required>
-        @for($i = 2; $i < count($statuses) + 1; $i++ )
-        <option value="{{$i}}">{{$statuses[$i]}}</option>
+        @for($i = 2; $i < count($trackingStatuses) + 1; $i++ )
+        <option value="{{$i}}">{{$trackingStatuses[$i]}}</option>
         @endfor
         </select>
       </div>

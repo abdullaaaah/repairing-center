@@ -235,32 +235,6 @@ class AdminController extends Controller
       ]);
     }
 
-
-    public function showRepair(\App\Repair $repair)
-    {
-      if($repair->trackings->last())
-      {
-        $currentStat = \App\Tracking::status( $repair->trackings->last() );
-      } else {
-        $currentStat = "Reserved.";
-      }
-
-      if($repair->variation->color = "DO NOT DELETE THIS")
-      {
-        $repair->variation->color = "No variation selected";
-      }
-
-      return view('admin.manage.repair', [
-
-        'is_page_active' => PagesController::isPageActive('manage'),
-        'page_title' => 'Manage',
-        'repair' => $repair,
-        'currentStat' => $currentStat,
-        'statuses' => \App\Tracking::getStatuses()
-      ]);
-
-    }
-
     public function storeTrackings()
     {
 

@@ -121,7 +121,7 @@ Route::get('/admin/manage/{country}/ongoing', 'AdminRepairsController@showAccept
 
 Route::get('/admin/manage/{country}/completed', 'AdminRepairsController@showCompletedRepairs')->name('completed-repairs');
 
-Route::get('/admin/manage/repair/{repair}', 'AdminController@showRepair');
+Route::get('/admin/manage/repair/{repair}', 'AdminRepairsController@showRepair');
 
 Route::post('/admin/trackings', 'AdminController@storeTrackings');
 

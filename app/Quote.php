@@ -21,7 +21,7 @@ class Quote extends Model
 
     if($country_code == "UK")
     {
-      return '€'.$amt;
+      return '£'.$amt;
     }
 
     if($country_code == "UAE")

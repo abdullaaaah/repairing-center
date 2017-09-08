@@ -32,4 +32,16 @@ class Variation extends Model
 
   }
 
+  public static function getFormattedVariation($variation)
+  {
+
+    if($variation->color == "DO NOT DELETE THIS")
+    {
+      return "None";
+    } else {
+      return $variation->color;
+    }
+
+  }
+
 }

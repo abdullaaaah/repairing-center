@@ -24,9 +24,7 @@ class Repair extends Model
 
     public function trackings()
     {
-
       return $this->hasMany('\App\Tracking', 'repair_id');
-
     }
 
     public function variation()
@@ -64,12 +62,7 @@ class Repair extends Model
 
       return array_filter(iterator_to_array($repairs_array), function($repair)
       {
-
-        if( !$repair->is_accepted )
-        {
-          return true;
-        }
-
+        return static::isRepairPending($repair);
       });
 
     }
@@ -79,12 +72,7 @@ class Repair extends Model
 
       return array_filter(iterator_to_array($repairs_array), function($repair)
       {
-
-        if( $repair->is_accepted && !$repair->is_completed )
-        {
-          return true;
-        }
-
+        return static::isRepairAccepted($repair);
       });
 
     }
@@ -94,16 +82,119 @@ class Repair extends Model
 
       return array_filter(iterator_to_array($repairs_array), function($repair)
       {
-
-        if( $repair->is_completed )
-        {
-          return true;
-        }
-
+        return static::isRepairCompleted($repair);
       });
 
     }
 
+    public static function isRepairPending($repair)
+    {
+
+      if( !$repair->is_accepted )
+      {
+        return true;
+      }
+
+    }
+
+    public static function isRepairAccepted($repair)
+    {
+
+      if( $repair->is_accepted && !$repair->is_completed )
+      {
+        return true;
+      }
+
+    }
+
+    public static function isRepairCompleted($repair)
+    {
+
+      if( $repair->is_completed )
+      {
+        return true;
+      }
+
+    }
+
+    public static function isRepairRejected($repair)
+    {
+
+      if( $repair->is_accepted == 2 )
+      {
+        return true;
+      }
+
+    }
+
+    public static function getRepairStatus($repair)
+    {
+
+      $status = false;
+
+      if( static::isRepairPending($repair) )
+      {
+        $status = "Pending Approval";
+      }
+
+      if( static::isRepairAccepted($repair) )
+      {
+        $status = "In Progress";
+      }
+
+      if( static::isRepairRejected($repair) )
+      {
+        $status = "Rejected";
+      }
+
+      if( static::isRepairCompleted($repair) )
+      {
+        $status = "Completed";
+      }
+
+      return $status;
+
+    }
+
+    public function getTrackingStatus()
+    { 
+      return Tracking::status( $this->trackings->last() );
+    }
+
+    public function checkIfExist($var)
+    {
+      if(isset($var))
+      {
+        return $var;
+      } else {
+        return "Not provided.";
+      }
+    }
+
+    public function getModelNo()
+    {
+      return $this->checkIfExist($this->model_number);
+    }
+
+    public function getDescription()
+    {
+      return $this->checkIfExist($this->description);
+    }
+
+    public function getPaymentAmount()
+    {
+      return Quote::formatQuote($this->quote->country_code, $this->quote->price);
+    }
+
+    public function isPaid()
+    {
+      if( isset($this->payment_id) )
+      {
+        return "Paid!";
+      } else {
+        return "Payment due...";
+      }
+    }
 
 
 
