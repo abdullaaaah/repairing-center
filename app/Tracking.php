@@ -48,4 +48,17 @@ class Tracking extends Model
     }
   }
 
+  public static function isRepairAwaiting($repair)
+  {
+    //awaiting repairs are repairs which are accepted but don't have any tracking details
+
+    if ( count($repair->trackings) && $repair->trackings->last()->status == 1 )
+    {
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
 }

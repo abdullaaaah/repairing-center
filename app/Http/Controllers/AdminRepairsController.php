@@ -27,15 +27,19 @@ class AdminRepairsController extends Controller
     public function showPendingRepairs($country)
     {
 
-      $repairs = Repair::getPendingRepairs( Country::findByName($country)->repairs );
+      //these repairs are accepted and not in progress.
+
+      $repairs = Repair::getAwaitingRepairs( Country::findByName($country)->repairs );
 
       $type = "Pending Repairs";
 
       $page_title = 'Pending Repairs';
 
+      $page_desc = "These bookings have been accepted and are waiting a technicians response.";
+
       $is_page_active = PagesController::isPageActive('manage');
 
-      $data = compact('repairs', 'type', 'country', 'page_title', 'is_page_active');
+      $data = compact('repairs', 'type', 'country', 'page_title', 'is_page_active', 'page_desc');
 
       return view('admin.manage.all', $data);
 
@@ -50,9 +54,11 @@ class AdminRepairsController extends Controller
 
       $page_title = 'Accepted Repairs';
 
+      $page_desc = "These bookings are currently under progress.";
+
       $is_page_active = PagesController::isPageActive('manage');
 
-      $data = compact('repairs', 'type', 'country', 'page_title', 'is_page_active');
+      $data = compact('repairs', 'type', 'country', 'page_title', 'is_page_active', 'page_desc');
 
       return view('admin.manage.all', $data);
 
@@ -67,9 +73,30 @@ class AdminRepairsController extends Controller
 
       $page_title = 'Completed Repairs';
 
+      $page_desc = "These bookings have been completed.";
+
       $is_page_active = PagesController::isPageActive('manage');
 
-      $data = compact('repairs', 'type', 'country', 'page_title', 'is_page_active');
+      $data = compact('repairs', 'type', 'country', 'page_title', 'is_page_active', 'page_desc');
+
+      return view('admin.manage.all', $data);
+
+    }
+
+    public function showRejectedRepairs($country)
+    {
+
+      $repairs = Repair::getRejectedRepairs( \App\Country::findByName($country)->repairs );
+
+      $type = "Rejected Repairs";
+
+      $page_title = 'Rejected Repairs';
+
+      $page_desc = "These bookings have been rejected.";
+
+      $is_page_active = PagesController::isPageActive('manage');
+
+      $data = compact('repairs', 'type', 'country', 'page_title', 'is_page_active', 'page_desc');
 
       return view('admin.manage.all', $data);
 
@@ -112,6 +139,16 @@ class AdminRepairsController extends Controller
       $repair->save();
 
       return redirect(route('home-admin'));
+    }
+
+    public function complete(Repair $repair)
+    {
+      $repair->is_completed = 1;
+      $repair->save();
+
+      //mail
+
+      return redirect(route('admin-show-repair', $repair->id));
     }
 
 

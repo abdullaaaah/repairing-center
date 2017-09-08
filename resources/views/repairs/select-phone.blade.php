@@ -78,7 +78,7 @@
           <label class="label" for="phone_model_id">Please select your variation</label>
 
           <select class="custom-select" id="step-two-variations" name="variation_id" required>
-            <option>
+            <option value='0'>
               Select
             </option>
 

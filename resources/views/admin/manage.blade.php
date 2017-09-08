@@ -12,36 +12,42 @@
   <h4>UAE</h4>
 
   <div class="row">
-    <div class="col-md-4">
-      <a href="{{route('new-repairs', 'uae')}}"><div class="inventory-box">View Newly Booked Repairs</div></a>
+    <div class="col-md-3">
+      <a href="{{route('new-repairs', 'uae')}}"><div class="inventory-box">Repairs awaiting technician</div></a>
     </div>
 
-    <div class="col-md-4">
-      <a href="{{route('ongoing-repairs', 'uae')}}"><div class="inventory-box">View on-going repairs</div></a>
+    <div class="col-md-3">
+      <a href="{{route('ongoing-repairs', 'uae')}}"><div class="inventory-box">Repairs under progress</div></a>
     </div>
 
-    <div class="col-md-4">
-      <a href="{{route('completed-repairs', 'uae')}}"><div class="inventory-box">View completed repairs</div></a>
+    <div class="col-md-3">
+      <a href="{{route('completed-repairs', 'uae')}}"><div class="inventory-box">Repairs completed</div></a>
+    </div>
+
+    <div class="col-md-3">
+      <a href="{{route('rejected-repairs', 'uae')}}"><div class="inventory-box">Repairs Rejected</div></a>
     </div>
   </div>
 
   <h4 style="margin-top:20px;">UK</h4>
 
   <div class="row">
-    <div class="col-md-4">
-      <a href="{{route('new-repairs', 'uk')}}"><div class="inventory-box">View Newly Booked Repairs</div></a>
+    <div class="col-md-3">
+      <a href="{{route('new-repairs', 'uk')}}"><div class="inventory-box">Repairs awaiting technician</div></a>
     </div>
 
-    <div class="col-md-4">
-      <a href="{{route('ongoing-repairs', 'uk')}}"><div class="inventory-box">View on-going repairs</div></a>
+    <div class="col-md-3">
+      <a href="{{route('ongoing-repairs', 'uk')}}"><div class="inventory-box">Repairs under progress</div></a>
     </div>
 
-    <div class="col-md-4">
-      <a href="{{route('completed-repairs', 'uk')}}"><div class="inventory-box">View completed repairs</div></a>
+    <div class="col-md-3">
+      <a href="{{route('completed-repairs', 'uk')}}"><div class="inventory-box">Repairs completed</div></a>
+    </div>
+
+    <div class="col-md-3">
+      <a href="{{route('rejected-repairs', 'uk')}}"><div class="inventory-box">Repairs Rejected</div></a>
     </div>
   </div>
 
-
-</div>
 
 @endsection

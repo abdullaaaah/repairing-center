@@ -3,13 +3,168 @@
 @section('content')
 
 <div id="manage-repairs-page-page">
-  <h1 class="h1">Booking details for Repair #{{$repair->id}}</h1>
+  <h1 class="h1">Repair Management</h1>
+
+  <h4>Actions</h4>
+
+  @if( $repair->is_completed )
+
+  <div class="alert alert-success">
+    This booking has been completed, thus the actions are disabled.<br />
+    Client has been notified to complete payment if they chose paypal.
+  </div>
+
+    @if($repair->isPaymentDue())
+
+    <div class="alert alert-danger">
+      Payment has not yet been made.
+    </div>
+
+    @else
+
+      <h4>Transaction details</h4>
+
+      <div class="row">
+        <table class="table table-responsive table-custom">
+          <tbody>
+
+            <tr>
+              <th>
+                Transaction #
+              </th>
+
+              <td>
+                {{ $repair->getTransactionId() }}
+              </td>
+            </tr>
+
+            <tr>
+              <th>
+                Amount Paid
+              </th>
+
+              <td>
+                {{ $repair->getAmountPaid() }}
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    @endif
+
+  @else
+
+
+  <div class="row">
+
+    <div class="col-md-4">
+
+      <form method="POST" action="{{route('complete-repair', $repair->id)}}" id="form-1">
+
+        {{method_field("PATCH")}}
+
+        {{csrf_field()}}
+
+        <input type="hidden" name="tracking_status" value="" />
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-success confirmable" style="width:100%;" data-form-id="1"><i class="fa fa-reply" aria-hidden="true"></i> Mark as complete</button>
+        </div>
+
+      </form>
+
+    </div>
+
+    <div class="col-md-4">
+
+      <div class="form-group">
+        <button type="button" class="btn btn-danger" style="width:100%" data-toggle="modal" data-target="#trackingStatusModal"><i class="fa fa-truck" aria-hidden="true"></i> Tracking Info</button>
+      </div>
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="trackingStatusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Update tracking information</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <p>
+                Current status: <br /> <strong>{{ $repair->getTrackingStatus() }}</strong>
+              </p>
+
+              <form method="POST" action="/admin/trackings">
+
+              {{csrf_field()}}
+
+              <input type="hidden" name="repair_id" value="{{$repair->id}}"/>
+
+              <div class='form-group'>
+
+                <label for="status">Select a tracking status.</label>
+
+                <select name="status" class="form-control" required>
+                @for($i = 2; $i < count($trackingStatuses) + 1; $i++ )
+                <option value="{{$i}}">{{$trackingStatuses[$i]}}</option>
+                @endfor
+                </select>
+              </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+
+              </form>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  @endif
 
   <h4>Repair details</h4>
+
 
   <div class="row">
     <table class="table table-responsive table-custom">
       <tbody>
+
+        <tr>
+          <th>
+            Booking Reference
+          </th>
+
+          <td>
+            {{$repair->booking_reference}}
+          </td>
+        </tr>
+
+        <tr>
+          <th>
+            Status
+          </th>
+
+          <td>
+            {{ \App\Repair::getRepairStatus($repair) }}
+          </td>
+        </tr>
+
         <tr>
 
           <th>TYPE OF REPAIR</th>
@@ -116,55 +271,6 @@
     </table>
   </div>
 
-  <h4>Tracking details</h4>
-
-  <div class="row">
-    <table class="table table-responsive table-custom">
-      <tbody>
-        <tr>
-
-          <th>CURRENT STATUS</th>
-
-          <td><strong>{{ $repair->getTrackingStatus() }}</strong></td>
-
-        </tr>
-
-      </tbody>
-    </table>
-  </div>
-
-  <h4>Update tracking status</h4>
-
-  <div class="row">
-
-    <div class="col-md-12">
-
-      <form method="POST" action="/admin/trackings">
-
-      {{csrf_field()}}
-
-      <input type="hidden" name="repair_id" value="{{$repair->id}}"/>
-
-      <div class='form-group'>
-
-        <label for="status">Select a tracking status.</label>
-
-        <select name="status" class="form-control" required>
-        @for($i = 2; $i < count($trackingStatuses) + 1; $i++ )
-        <option value="{{$i}}">{{$trackingStatuses[$i]}}</option>
-        @endfor
-        </select>
-      </div>
-
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary" style="margin-top:20px; width:100%">Update Status</button>
-      </div>
-
-      </form>
-
-    </div>
-
-  </div>
 
 </div>
 

@@ -56,7 +56,7 @@
 
     <td>
 
-      <form method="post" action="{{route('accept-repair', $booking->id)}}">
+      <form method="post" action="{{route('reject-repair', $booking->id)}}">
         {{ method_field("PATCH") }}
         {{ csrf_field() }}
         <button class="btn btn-danger" type="submit"><i class="fa fa-times" aria-hidden="true"></i> Reject</button>

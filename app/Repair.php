@@ -67,6 +67,16 @@ class Repair extends Model
 
     }
 
+    public static function getAwaitingRepairs($repairs_array)
+    {
+
+      return array_filter(iterator_to_array($repairs_array), function($repair)
+      {
+        return static::isRepairAwaiting($repair);
+      });
+
+    }
+
     public static function getAcceptedRepairs($repairs_array)
     {
 
@@ -87,6 +97,16 @@ class Repair extends Model
 
     }
 
+    public static function getRejectedRepairs($repairs_array)
+    {
+
+      return array_filter(iterator_to_array($repairs_array), function($repair)
+      {
+        return static::isRepairRejected($repair);
+      });
+
+    }
+
     public static function isRepairPending($repair)
     {
 
@@ -97,10 +117,18 @@ class Repair extends Model
 
     }
 
+    public static function isRepairAwaiting($repair)
+    {
+      if( static::isRepairAccepted($repair) )
+      {
+        return Tracking::isRepairAwaiting($repair);
+      }
+    }
+
     public static function isRepairAccepted($repair)
     {
 
-      if( $repair->is_accepted && !$repair->is_completed )
+      if( $repair->is_accepted == 1 && !$repair->is_completed )
       {
         return true;
       }
@@ -188,11 +216,29 @@ class Repair extends Model
 
     public function isPaid()
     {
-      if( isset($this->payment_id) )
+
+      if($this->payment_method == "paypal")
       {
-        return "Paid!";
+        if( isset($this->payment_id) )
+        {
+          return "Paid!";
+        } else {
+          return "Not yet paid.";
+        }
       } else {
-        return "Payment due...";
+        return "Payment will be manually collected";
+      }
+
+    }
+
+    public function isPaymentDue()
+    {
+      if($this->is_completed)
+      {
+        if($this->payment_method="paypal")
+        {
+          return true;
+        }
       }
     }
 

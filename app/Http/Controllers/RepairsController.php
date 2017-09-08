@@ -88,7 +88,7 @@ class RepairsController extends Controller
 
     $this->validate(request(), [
       'phone_id' => 'required|not_in:0',
-      'variation_id' => 'required|not_in:0',
+      //'variation_id' => 'required|not_in:0',
       'model_number' => 'nullable|numeric',
       'description' => 'required',
       'country_id' => 'required|not_in:0',
