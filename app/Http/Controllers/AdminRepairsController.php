@@ -98,6 +98,22 @@ class AdminRepairsController extends Controller
 
     }
 
+    public function accept(Repair $repair)
+    {
+      $repair->is_accepted = 1;
+      $repair->save();
+
+      return redirect(route('home-admin'));
+    }
+
+    public function reject(Repair $repair)
+    {
+      $repair->is_accepted = 2;
+      $repair->save();
+
+      return redirect(route('home-admin'));
+    }
+
 
 
 

@@ -43,9 +43,12 @@ class AdminController extends Controller
         $attention['phones_with_no_quotes'] = $phones_with_no_quotes;
       }
 
+      //pending bookings
+      $pendingBookings = Repair::getPendingRepairs(Repair::all());
+
       //delegate
 
-      $data = compact('total_bookings', 'total_phones', 'payment_count', 'attention');
+      $data = compact('total_bookings', 'total_phones', 'payment_count', 'attention', 'pendingBookings');
 
       $params = [
         'is_page_active' => PagesController::isPageActive('admin_home'),

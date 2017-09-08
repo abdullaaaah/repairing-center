@@ -6,6 +6,73 @@
 <p>You can use this panel to manage bookings, payments and inventory.</p>
 <hr/>
 
+@if(count($pendingBookings))
+
+<h4>Pending bookings</h4>
+<p>
+  Please accept or reject the following bookings.
+</p>
+
+<table class="table table-responsive table-custom">
+  <thead>
+    <tr>
+      <th>
+        Booking #
+      </th>
+
+      <th>
+        Booking details
+      </th>
+      <th>
+        Accept
+      </th>
+      <th>
+        Reject
+      </th>
+    </tr>
+  </thead>
+
+@foreach($pendingBookings as $booking)
+
+  <tr>
+
+    <td>
+      Test 101
+    </td>
+
+    <td>
+      <a href="{{route('admin-show-repair', $booking->id)}}">Details</a>
+    </td>
+
+    <td>
+
+      <form method="post" action="{{route('accept-repair', $booking->id)}}">
+        {{ method_field("PATCH") }}
+        {{ csrf_field() }}
+        <button class="btn btn-success" type="submit"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
+      </form>
+
+    </td>
+
+    <td>
+
+      <form method="post" action="{{route('accept-repair', $booking->id)}}">
+        {{ method_field("PATCH") }}
+        {{ csrf_field() }}
+        <button class="btn btn-danger" type="submit"><i class="fa fa-times" aria-hidden="true"></i> Reject</button>
+      </form>
+
+    </td>
+  </tr>
+
+@endforeach
+
+</table>
+
+@endif
+
+
+
 <h4>Brief summary of events</h4>
 
 <div class="row">

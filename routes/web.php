@@ -124,7 +124,7 @@ Route::get('/admin/manage/{country}/ongoing', 'AdminRepairsController@showAccept
 
 Route::get('/admin/manage/{country}/completed', 'AdminRepairsController@showCompletedRepairs')->name('completed-repairs');
 
-Route::get('/admin/manage/repair/{repair}', 'AdminRepairsController@show');
+Route::get('/admin/manage/repair/{repair}', 'AdminRepairsController@show')->name('admin-show-repair');
 
 //trackings
 
@@ -165,3 +165,9 @@ Route::get('/admin/user/{user?}', 'AdminController@settings')->name('settings');
 Route::patch('/admin/user/email/{user?}', 'AdminController@editEmail')->name('change-email');
 
 Route::patch('/admin/user/password/{user?}', 'AdminController@editPassword')->name('change-password');
+
+//accept reject routes
+
+Route::patch('/admin/manage/repair/{repair}/accept', 'AdminRepairsController@accept')->name('accept-repair');
+
+Route::patch('/admin/manage/repair/{repair}/reject', 'AdminRepairsController@reject')->name('reject-repair');

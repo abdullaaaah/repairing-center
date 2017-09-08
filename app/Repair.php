@@ -157,7 +157,7 @@ class Repair extends Model
     }
 
     public function getTrackingStatus()
-    { 
+    {
       return Tracking::status( $this->trackings->last() );
     }
 
