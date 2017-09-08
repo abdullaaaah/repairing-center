@@ -106,120 +106,12 @@ class AdminController extends Controller
     public function inventory()
     {
 
-      return view('admin.inventory', [
+      $is_page_active = PagesController::isPageActive('inventory');
+      $page_title = 'Inventory';
 
-        'is_page_active' => PagesController::isPageActive('inventory'),
-        'page_title' => 'Inventory'
+      $data = compact('is_page_active', 'page_title');
 
-      ]);
-    }
-
-    public function brand_index()
-    {
-
-      $brands = \App\PhoneMake::all();
-
-      return view('admin.inventory.brands', [
-
-        'is_page_active' => PagesController::isPageActive('inventory'),
-        'page_title' => 'Brands',
-        'brands' => $brands
-
-      ]);
-    }
-
-    public function phoneMake(\App\PhoneMake $phoneMake)
-    {
-
-      $phones = $phoneMake->phones;
-
-      return view('admin.inventory.phones', [
-
-        'is_page_active' => PagesController::isPageActive('inventory'),
-        'page_title' => 'Phones',
-        'phones' => $phones,
-        'brand' => $phoneMake->id
-
-      ]);
-    }
-
-    public function deletePhone(\App\Phone $phone)
-    {
-      $phone->delete();
-
-      return redirect("/admin/inventory/brand/" . $phone->phoneMake->id);
-    }
-
-    public function createVariation(\App\Phone $phone)
-    {
-
-      return view('admin.inventory.variations', [
-
-        'is_page_active' => PagesController::isPageActive('inventory'),
-        'page_title' => 'Variations',
-        'phone' => $phone,
-
-      ]);
-
-    }
-
-    public function deleteVariation(\App\Variation $variation)
-    {
-
-      $variation->delete();
-
-      return redirect("/admin/inventory/phone/" . $variation->phone->id);
-    }
-
-    public function storeVariation()
-    {
-
-      $this->validate(request(), [
-        'color' => 'required',
-        'capacity' => 'required|numeric'
-      ]);
-
-      \App\Variation::create( request()->all() );
-
-      return redirect("/admin/inventory/phone/" . request()->phone_id);
-
-    }
-
-    public function createPhone()
-    {
-
-      $brands = \App\PhoneMake::all();
-
-      return view('admin.inventory.create_phone', [
-
-        'is_page_active' => PagesController::isPageActive('inventory'),
-        'page_title' => "Add Phone",
-        'brands' => $brands
-
-      ]);
-    }
-
-    public function storePhone()
-    {
-
-      $this->validate(request(), [
-
-        'phone_model_id' => 'required',
-        'model' => 'required'
-
-      ]);
-
-      $phone = \App\Phone::create(request(['phone_model_id', 'model']));
-
-      //create a default variation
-
-      \App\Variation::create([
-        'phone_id' => $phone->id,
-        'color' => 'DO NOT DELETE THIS',
-        'capacity' => 0
-      ]);
-
-      return redirect('/admin/inventory/brand/'. request()->phone_model_id);
+      return view('admin.inventory', $data);
 
     }
 

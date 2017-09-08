@@ -8,7 +8,7 @@
 
 <table class="table table-responsive table-custom">
   <thead>
-    <tr><th>Color</th><th>Capacity</th><th>Action</th>
+    <tr><th>Color</th><th>Action</th>
   </thead>
 
 @foreach($phone->variations as $variation)
@@ -18,13 +18,6 @@
     <td>
 
       {{ $variation->color }}
-
-    </td>
-
-
-    <td>
-
-    {{ $variation->capacity }} GB
 
     </td>
 
@@ -55,8 +48,6 @@
       <input type="hidden" name="phone_id" value="{{ $phone->id }}"/>
 
       <td><input type="text" class="form-control" placeholder="Gold" name="color" required/></td>
-
-      <td><input type="text" class="form-control" placeholder="32" name="capacity" required/></td>
 
       <td><button class="btn btn-primary" name="submit" type="submit">Create</button></td>
 

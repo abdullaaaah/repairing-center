@@ -91,25 +91,28 @@ Route::get('/admin', 'AdminController@home');
 
 Route::get('/admin/inventory', 'AdminController@inventory')->name('inventory-admin');
 
-Route::get('/admin/inventory/brand', 'AdminController@brand_index');
+Route::get('/admin/inventory/brand', 'AdminPhonesController@showBrands')->name('show-brands-admin');
 
-Route::get('/admin/inventory/brand/{phoneMake}', 'AdminController@phoneMake');
 
 //phones
 
-Route::delete('/admin/inventory/phone/{phone}', 'AdminController@deletePhone');
+Route::get('/admin/inventory/brand/{phoneMake}', 'AdminPhonesController@index');
 
-Route::get('/admin/inventory/phone/{phone}', 'AdminController@createVariation');
+Route::delete('/admin/inventory/phone/{phone}', 'AdminPhonesController@delete');
 
-Route::delete('/admin/inventory/variation/{variation}', 'AdminController@deleteVariation');
+Route::get('/admin/inventory/phone/{phone}', 'AdminPhonesController@show'); //also create variations here
 
-Route::post('/admin/inventory/variation', 'AdminController@storeVariation');
+Route::get('/admin/inventory/phones/create', 'AdminPhonesController@create');
 
-//create phones
+Route::post('/admin/inventory/phones', 'AdminPhonesController@store');
 
-Route::get('/admin/inventory/phones/create', 'AdminController@createPhone');
 
-Route::post('/admin/inventory/phones', 'AdminController@storePhone');
+//variations
+
+Route::delete('/admin/inventory/variation/{variation}', 'AdminVariationsController@delete');
+
+Route::post('/admin/inventory/variation', 'AdminVariationsController@store');
+
 
 //manage repairs
 
