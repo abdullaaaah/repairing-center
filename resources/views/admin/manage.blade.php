@@ -9,6 +9,7 @@
   <hr />
 
 
+  @if(Auth::user()->access_uae)
   <h4>UAE</h4>
 
   <div class="row">
@@ -28,7 +29,10 @@
       <a href="{{route('rejected-repairs', 'uae')}}"><div class="inventory-box">Repairs Rejected</div></a>
     </div>
   </div>
+  @endif
 
+
+  @if(Auth::user()->access_uae)
   <h4 style="margin-top:20px;">UK</h4>
 
   <div class="row">
@@ -48,6 +52,7 @@
       <a href="{{route('rejected-repairs', 'uk')}}"><div class="inventory-box">Repairs Rejected</div></a>
     </div>
   </div>
+  @endif
 
 
 @endsection

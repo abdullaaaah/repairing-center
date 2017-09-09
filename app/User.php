@@ -26,4 +26,28 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public static function getRepairs() {
+
+      if( \Auth::user()->access_uae AND !\Auth::user()->access_uk )
+      {
+        return Repair::where('country_id', '=', 2)->get();
+      }
+
+      if( \Auth::user()->access_uk AND !\Auth::user()->access_uae )
+      {
+        return Repair::where('country_id', '=', 1)->get();
+      }
+
+      if( \Auth::user()->access_uae AND \Auth::user()->access_uk )
+      {
+        return Repair::all();
+      }
+
+    }
+
+
+
+
 }

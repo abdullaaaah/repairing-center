@@ -253,7 +253,7 @@ class Repair extends Model
         $reference = "RC4400" . $repair->id;
       }
 
-      if($repair->country_code==2)
+      if($repair->country_id==2)
       {
         $reference = "MR97100" . $repair->id;
       }

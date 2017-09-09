@@ -31,6 +31,13 @@
           <a class="nav-link" href="{{ route('manage-location') }}">MANAGE LOCATIONS</a>
         </li>
 
+        @if(Auth::user()->level == 1)
+
+        <li class="nav-item {{ $is_page_active['create-admin-account'] ? 'active' : '' }}">
+          <a class="nav-link" href="{{ route('create-admin-account') }}">ADMIN ACCOUNTS</a>
+        </li>
+
+        @endif
 
         <li class="nav-item {{ $is_page_active['settings'] ? 'active' : '' }}">
           <a class="nav-link" href="{{ route('settings', Auth::user()->id) }}">SETTINGS</a>

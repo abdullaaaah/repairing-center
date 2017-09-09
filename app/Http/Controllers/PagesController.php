@@ -105,7 +105,8 @@ class PagesController extends Controller
       'manage' => false,
       'sales' => false,
       'location' => false,
-      'settings' => false
+      'settings' => false,
+      'create-admin-account' => false
     ];
 
     $pages[$page] = true;

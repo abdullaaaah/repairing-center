@@ -168,6 +168,8 @@ Route::patch('/admin/user/email/{user?}', 'AdminController@editEmail')->name('ch
 
 Route::patch('/admin/user/password/{user?}', 'AdminController@editPassword')->name('change-password');
 
+Route::get('/admin/user/create', 'AdminController@createUser')->name('create-admin-account');
+
 //accept reject routes
 
 Route::patch('/admin/manage/repair/{repair}/accept', 'AdminRepairsController@accept')->name('accept-repair');
