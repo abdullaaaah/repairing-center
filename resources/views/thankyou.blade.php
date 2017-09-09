@@ -25,33 +25,33 @@
 
   <div class="container" id="thankyou">
 
-    <section id="confirmation">
-      <p style="margin-bottom:40px; font-weight:700;">If any of these details are incorrect, please <a href="/contact">contact us.</a></p>
-
-      <p>
-        <strong>Contact Name:</strong>
-        {{ $contact['contact_full_name'] }}
+    <section id="confirmation" style="margin-bottom:30px;">
+      <p style="margin-bottom:; font-weight:400;">Please save the following details, this is how we will identify your booking.<br />
+        You can use our tracker to track your repair at anytime using your email address or phone number.
       </p>
 
-      <p>
-        <strong>Contact Email:</strong>
-        {{ $contact['contact_email'] }}
-      </p>
+      <dl class="dl-horizontal">
 
-      <p>
-        <strong>Contact Phone #:</strong>
-        {{ $contact['contact_phone_number'] }}
-      </p>
+        <dt>Booking Reference No.</dt>
+        <dd>{{ $ref }}</dd>
 
-      <p>
-        <strong>Contact Address:</strong>
-        {{ $contact['contact_address'] }}
-      </p>
+        <dt>Contact Name</dt>
+        <dd>{{ $contact['contact_full_name'] }}</dd>
+
+        <dt>Email Address</dt>
+        <dd>{{ $contact['contact_email'] }}</dd>
+
+        <dt>Phone #</dt>
+        <dd>{{ $contact['contact_phone_number'] }}</dd>
+
+        <dt>Contact Address</dt>
+        <dd>{{ $contact['contact_address'] }}</dd>
+      </dl>
 
 
     </section>
 
-    <p style="margin-bottom:80px;">You can use this website to further track the process of repair by clicking <a href="/track">here</a>.</p>
+    <p style="margin-bottom:60px;"></p>
 
     </div>
 

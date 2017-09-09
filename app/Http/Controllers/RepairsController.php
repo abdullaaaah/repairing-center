@@ -187,7 +187,7 @@ class RepairsController extends Controller
 
    $repair = Repair::create($everything);
 
-   $repair->booking_reference = Repair::generateBookingReference($repair);
+   $ref = $repair->booking_reference = Repair::generateBookingReference($repair);
    $repair->save();
 
     \App\Tracking::create([
@@ -200,7 +200,7 @@ class RepairsController extends Controller
       'is_page_active' => false
     ];
 
-    $data = compact('contact');
+    $data = compact('contact', 'ref');
 
     return view('thankyou', array_merge($params, $data));
 

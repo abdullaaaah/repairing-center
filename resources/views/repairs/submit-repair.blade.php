@@ -21,7 +21,7 @@
           </div>
         </div>
 
-        <p class="lead constrain-width mt-4" style="display:none;" id="price-p">Your total is {{$amount}}, but you don't have to pay this amount until the repair is finished.</p>
+        <p class="lead constrain-width mt-4" style="display:none;" id="price-p"><strong style="font-weight:900"><i class="fa fa-info-circle" aria-hidden="true"></i> Your total is {{$amount}}</strong>, <em>but you don't have to pay this amount until the repair is finished.</em></p>
         <div class="divider"></div>
       </div>
 
