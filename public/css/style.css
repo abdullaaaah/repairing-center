@@ -452,7 +452,7 @@ form select
 .floating-call {
   position: fixed;
   right:0px;
-  bottom:150px;
+  bottom:75px;
   padding:10px;
   background-color:skyblue;
   z-index: 111111;
@@ -463,7 +463,7 @@ form select
 
 .floating-call p {
   color:white;
-  margin-top:5px;
+  margin-top:13px;
   text-align: center;
 }
 

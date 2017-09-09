@@ -262,6 +262,18 @@ class Repair extends Model
 
     }
 
+    public static function processPhoneNumber($num)
+    {
+      $num = str_replace("-","", $num );
+      $num = str_replace(" ","", $num );
+
+      if( $num[0] == 0 )
+      {
+        $num = substr($num, 1);
+      }
+
+      return $num;
+    }
 
 
 }

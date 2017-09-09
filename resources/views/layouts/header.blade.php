@@ -29,6 +29,6 @@
 
 <div class="floating-call">
   <p>
-    <strong>Confused?</strong> <br /> <a href="/contact">Contact now.</a>
+     <strong><a href="/contact">Contact us</a></strong>
   </p>
 </div>

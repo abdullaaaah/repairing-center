@@ -65,7 +65,7 @@
               <input type="text" class="form-control-custom mb-4" placeholder="Name" value="" name="name" required>
             </div>
             <div class="col-md-5">
-              <input type="email" class="form-control-custom mb-4" placeholder="Email address" value="" name="email" required>
+              <input type="text" class="form-control-custom mb-4" placeholder="Email Or Phone #" value="" name="email" required>
             </div>
             <br />
           </div>

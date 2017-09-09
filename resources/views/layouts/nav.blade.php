@@ -17,10 +17,6 @@
           <a class="nav-link" href="{{route('about')}}">ABOUT</a>
         </li>
 
-        <!--<li class="nav-item {{ $is_page_active['faq'] ? 'active' : '' }}">
-          <a class="nav-link" href="{{route('faq')}}">FAQ</a>
-        </li>-->
-
         <li class="nav-item {{ $is_page_active['contact'] ? 'active' : '' }}">
           <a class="nav-link" href="{{ route('contact') }}">CONTACT</a>
         </li>

@@ -174,13 +174,7 @@ class RepairsController extends Controller
 
    $contact = request()->all();
 
-   $contact['contact_phone_number'] = str_replace("-","", $contact['contact_phone_number'] );
-   $contact['contact_phone_number'] = str_replace(" ","", $contact['contact_phone_number'] );
-
-   if( $contact['contact_phone_number'][0] == 0 )
-   {
-     $contact['contact_phone_number'] = substr($contact['contact_phone_number'], 1);
-   }
+   $contact['contact_phone_number'] = Repair::processPhoneNumber($contact['contact_phone_number']);
 
    if( !isset($contact['contact_postal_code'] )) {
      $contact['contact_postal_code'] = 0;
@@ -264,6 +258,8 @@ class RepairsController extends Controller
 
   public function showByPhone($phone)
   {
+
+    $phone = Repair::processPhoneNumber($phone);
 
     return \App\Repair::latest()->where('contact_phone_number', '=', $phone)->first();
 
