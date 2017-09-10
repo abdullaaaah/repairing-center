@@ -23,6 +23,8 @@
 
     <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i|Montserrat:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+    @yield('chat')
+
   </head>
 
   <body>
