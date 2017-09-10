@@ -61,4 +61,15 @@ class Tracking extends Model
 
   }
 
+  public function setTrackingDetails($id, $num, $carrier)
+  {
+    $repair = Repair::find($id);
+    $repair->tracking_num = $num;
+    $repair->tracking_carrier = $carrier;
+    return $repair->save();
+  }
+
+
+
+
 }

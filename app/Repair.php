@@ -275,5 +275,74 @@ class Repair extends Model
       return $num;
     }
 
+    public function getIMEI()
+    {
+      if(isset($this->phone_imei))
+      {
+        return $this->phone_imei;
+      } else {
+        return "Not set";
+      }
+    }
+
+    public function getComments()
+    {
+      if(isset($this->comments))
+      {
+        return $this->comments;
+      } else {
+        return "Not set";
+      }
+    }
+
+    public function isDispatch()
+    {
+      return $this->trackings->where('status', '=', 8)->last();
+    }
+
+    public function isShipped()
+    {
+      if($this->isDispatch())
+      {
+        if($this->getTrackingNum()){
+          return true;
+        }
+      }
+    }
+
+    public function getTrackingNum()
+    {
+
+      if( $this->isDispatch() )
+      {
+
+        if( isset($this->tracking_num) )
+        {
+          return $this->tracking_num;
+        }
+
+      } else {
+
+        return false;
+
+      }
+
+    }
+
+    public function getTrackingCarrier()
+    {
+
+      if( $this->isDispatch() )
+      {
+        if( isset($this->tracking_carrier) )
+        {
+          return $this->tracking_carrier;
+        }
+      } else {
+        return false;
+      }
+
+    }
+
 
 }

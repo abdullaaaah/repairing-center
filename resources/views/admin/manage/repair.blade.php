@@ -77,6 +77,58 @@
 
     </div>
 
+
+    <div class="col-md-4">
+
+      <div class="form-group">
+        <button type="button" class="btn btn-info" style="width:100%" data-toggle="modal" data-target="#technicianModal"><i class="fa fa-key" aria-hidden="true"></i> Technical Details</button>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="technicianModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Technician Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <form method="POST" action="{{route('edit-technician-details', $repair->id)}}">
+
+                {{method_field("PATCH")}}
+                {{csrf_field()}}
+
+                <div class="form-group">
+                  <label for="phone_imei">IMEI #</label>
+                  <input type="text" class="form-control" name="phone_imei" value="{{ $repair->getIMEI() }}"/>
+                </div>
+
+                <div class="form-group">
+                  <label for="comments">Comments</label>
+                  <input type="text" class="form-control" name="comments" value="{{ $repair->getComments() }}"/>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+
+              </form>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
     <div class="col-md-4">
 
       <div class="form-group">
@@ -115,6 +167,24 @@
                 <option value="{{$i}}">{{$trackingStatuses[$i]}}</option>
                 @endfor
                 </select>
+              </div>
+
+              <p>
+                Tracking details will only save if "In dispatch" is selected.
+              </p>
+
+              <div class='form-group'>
+
+                <label for="tracking_num">Tracking # (if-any)</label>
+                <input type="text" name="track_num" value="{{$repair->getTrackingNum()}}" class="form-control" />
+
+              </div>
+
+              <div class='form-group'>
+
+                <label for="tracking_num">Tracking Carrier (if-any)</label>
+                <input type="text" name="track_carrier" value="{{$repair->getTrackingCarrier()}}" class="form-control" />
+
               </div>
 
 

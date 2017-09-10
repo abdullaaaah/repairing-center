@@ -25,6 +25,14 @@
 
     <div class="container" id="track-container" data-id="{{$repair->id}}">
 
+      @if($repair->isShipped())
+        <div class="alert alert-success" style="margin-bottom:30px; padding-top:25px;">
+          <p>
+            <strong style="color:green;">Good news! Your phone is on the way. <br />Tracking # {{$repair->getTrackingNum()}} via @ {{$repair->getTrackingCarrier()}}</strong>
+          </p>
+        </div>
+      @endif
+
       @for($i = 1; $i < count($stats); $i++)
 
       <div class="track-item" id="track-item-{{$i}}">

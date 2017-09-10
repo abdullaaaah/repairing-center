@@ -128,6 +128,8 @@ Route::get('/admin/manage/{country}/rejected', 'AdminRepairsController@showRejec
 
 Route::get('/admin/manage/repair/{repair}', 'AdminRepairsController@show')->name('admin-show-repair');
 
+Route::patch('/admin/manage/repair/{repair}/technician', 'AdminRepairsController@technician')->name('edit-technician-details');
+
 //trackings
 
 Route::post('/admin/trackings', 'AdminTrackingsController@store');

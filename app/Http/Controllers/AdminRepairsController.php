@@ -151,6 +151,16 @@ class AdminRepairsController extends Controller
       return redirect(route('admin-show-repair', $repair->id));
     }
 
+    public function technician(Repair $repair)
+    {
+
+      $repair->phone_imei = request()->phone_imei;
+      $repair->comments = request()->comments;
+      $repair->save();
+
+      return redirect(route('admin-show-repair', $repair->id));
+
+    }
 
 
 
