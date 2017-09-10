@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use \App\Country;
 use \App\City;
+use \App\User;
 
 class AdminLocationsController extends Controller
 {
@@ -18,7 +19,7 @@ class AdminLocationsController extends Controller
     public function index()
     {
 
-      $countries = Country::all();
+      $countries = User::getAllowedCountries();
 
       $data = compact('countries');
 

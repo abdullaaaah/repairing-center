@@ -1,7 +1,7 @@
 <hr>
 
 <footer>
-  <p>&copy; Brand 2017</p>
+  <p>&copy; Repairing Center 2017</p>
 </footer>
 </div> <!-- /container -->
 

@@ -139,4 +139,45 @@ class AdminController extends Controller
     }
 
 
+    public function createUser($success = false)
+    {
+
+      $users = User::all();
+
+      $is_page_active = PagesController::isPageActive('admin-create-user');
+      $page_title = 'Create user';
+
+      $data = compact('is_page_active', 'page_title', 'success', 'users');
+
+      return view('admin.create-user', $data);
+
+    }
+
+    public function storeUser()
+    {
+      $this->validate(request(), [
+        'name' => 'required',
+        'email' => 'required|unique:users',
+        'password' => 'required'
+      ]);
+
+      $user = User::create(request()->all());
+      $user->access_uae = isset(request()->access_uae) ? request()->access_uae : 0;
+      $user->access_uk = isset(request()->access_uk) ? request()->access_uk : 0;
+      $user->password = bcrypt($user->password);
+      $user->save();
+
+      return redirect(route('create-admin-account', 'success'));
+
+    }
+
+    public function deleteUser(User $user)
+    {
+      $user->delete();
+      return redirect(route('create-admin-account'));
+    }
+
+
+
+
 }

@@ -47,6 +47,24 @@ class User extends Authenticatable
 
     }
 
+    public static function getAllowedCountries()
+    {
+      if( \Auth::user()->access_uae AND !\Auth::user()->access_uk )
+      {
+        return Country::where('id', '=', 2)->get();
+      }
+
+      if( \Auth::user()->access_uk AND !\Auth::user()->access_uae )
+      {
+        return Country::where('id', '=', 1)->get();
+      }
+
+      if( \Auth::user()->access_uae AND \Auth::user()->access_uk )
+      {
+        return Country::all();
+      }
+    }
+
 
 
 

@@ -168,7 +168,12 @@ Route::patch('/admin/user/email/{user?}', 'AdminController@editEmail')->name('ch
 
 Route::patch('/admin/user/password/{user?}', 'AdminController@editPassword')->name('change-password');
 
-Route::get('/admin/user/create', 'AdminController@createUser')->name('create-admin-account');
+Route::get('/admin/create/user/{success?}', 'AdminController@createUser')->name('create-admin-account');
+
+Route::post('/admin/store/user', 'AdminController@storeUser')->name('store-user');
+
+Route::delete('/admin/delete/user/{user}', 'AdminController@deleteUser')->name('delete-user');
+
 
 //accept reject routes
 
