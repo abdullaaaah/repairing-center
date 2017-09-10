@@ -9,6 +9,7 @@ use \App\Repair;
 use \App\Phone;
 use \App\Payment;
 use \App\City;
+use \App\repairTimings;
 
 class AdminController extends Controller
 {
@@ -23,8 +24,23 @@ class AdminController extends Controller
     {
 
       $total_bookings = count( Repair::all() );
-      $total_phones = count( Phone::all() );
       $payment_count = count( Payment::all() );
+      $rejection_count = count( Repair::where('is_accepted', '=', 2)->get() );
+      $completion_count = count( Repair::where('is_completed', '=', 1)->get() );
+
+      $average_times = Repair::where('is_completed', '=', 1)->get();
+      //$average_repair_time = ;
+
+      $timings = array();
+
+      foreach($average_times as $repair)
+      {
+        $timings[] = repairTimings::getCompletionTime($repair->id);
+      }
+
+      $timings = array_filter($timings);
+      $average_time = array_sum($timings)/count($timings);
+      $average_time = round($average_time,1);
 
       $attention = [];
 
@@ -49,7 +65,7 @@ class AdminController extends Controller
 
       //delegate
 
-      $data = compact('total_bookings', 'total_phones', 'payment_count', 'attention', 'pendingBookings');
+      $data = compact('total_bookings', 'total_phones', 'payment_count', 'attention', 'pendingBookings', 'rejection_count', 'completion_count', 'average_time');
 
       $params = [
         'is_page_active' => PagesController::isPageActive('admin_home'),

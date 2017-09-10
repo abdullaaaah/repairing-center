@@ -14,6 +14,8 @@ use \App\Quote;
 
 use Illuminate\Support\Facades\Input;
 
+use \App\RepairTimings;
+
 
 class RepairsController extends Controller
 {
@@ -193,6 +195,10 @@ class RepairsController extends Controller
     \App\Tracking::create([
       'status' => 1,
       'repair_id' => $repair->id
+    ]);
+
+    repairTimings::create([
+      'repair_id'=>$repair->id
     ]);
 
     $params = [

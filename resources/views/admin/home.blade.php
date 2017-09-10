@@ -80,20 +80,32 @@
     <tbody>
       <tr>
 
-        <th>TOTAL BOOKINGS</th>
+        <th>Total Repairs Completed</th>
+
+        <td>{{$completion_count}}</td>
+
+      </tr>
+
+      <tr>
+        <th>Total Repairs Rejected</th>
+
+        <td>{{$rejection_count}}</td>
+      </tr>
+
+      <tr>
+        <th>Total Quotes</th>
 
         <td>{{$total_bookings}}</td>
-
       </tr>
 
       <tr>
-        <th>TOTAL PHONES</th>
+        <th>Average Repairing Time</th>
 
-        <td>{{$total_phones}}</td>
+        <td>{{$average_time}} Hour(s)</td>
       </tr>
 
       <tr>
-        <th>TOTAL ONLINE PAYMENTS</th>
+        <th>Total Online Payments</th>
 
         <td>{{$payment_count}}</td>
       </tr>
