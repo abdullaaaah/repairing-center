@@ -6,7 +6,7 @@
 
 @section('content')
 
-<section class="header-section text-center">
+<section class="header-section text-center" style="background-image:url('/img/about.jpg');">
   <div class="container">
     <h2>About</h2>
   </div>

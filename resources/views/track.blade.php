@@ -2,7 +2,7 @@
 
   @section('content')
 
-  <section class="header-section text-center">
+  <section class="header-section text-center" style="background-image:url('/img/location.jpg')">
     <div class="container">
       <h2 class="">Track your device</h2>
     </div>

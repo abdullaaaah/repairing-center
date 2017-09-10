@@ -3,7 +3,7 @@
   @section('content')
 
 
-  <section class="header-section text-center">
+  <section class="header-section text-center" style="background-image:url('/img/location.jpg')">
     <div class="container">
       <h2 class="smaller-480">Tracking information for <strong>{{strtoupper($phone->model)}}</strong></h2>
     </div>

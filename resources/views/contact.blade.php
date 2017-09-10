@@ -6,15 +6,15 @@
 window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
 d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
 _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
-$.src="https://v2.zopim.com/?56ET5Fh4cZQoVtsXU2URMAKmJPl8yWJO";z.t=+new Date;$.
+$.src="https://v2.zopim.com/?56HqI1aSBCJ9Es9u90peWOyUY5WtIWQ7";z.t=+new Date;$.
 type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 </script>
-<!--End of Zendesk Chat Script-->
+<!--End of Zendesk Chat Script-->>
 @endsection
 
 @section('content')
 
-<section class="header-section text-center">
+<section class="header-section text-center" style="background-image:url('/img/contact.jpg')">
   <div class="container">
     <h2>Contact</h2>
   </div>

@@ -470,3 +470,8 @@ form select
 .floating-call a {
   color:white;
 }
+
+.header-section h2 {
+  font-weight:900;
+  font-size:3.3rem;
+}
