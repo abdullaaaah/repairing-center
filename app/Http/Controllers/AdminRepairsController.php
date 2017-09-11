@@ -14,7 +14,7 @@ use \App\Tracking;
 
 use \App\Phone;
 
-use \App\RepairTimings;
+use \App\RepairTiming;
 
 class AdminRepairsController extends Controller
 {
@@ -147,7 +147,7 @@ class AdminRepairsController extends Controller
       $repair->is_completed = 1;
       $repair->save();
 
-      RepairTimings::finalize($repair->id);
+      RepairTiming::finalize($repair->id);
 
       //mail
 

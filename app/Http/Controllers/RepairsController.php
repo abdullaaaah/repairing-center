@@ -14,7 +14,7 @@ use \App\Quote;
 
 use Illuminate\Support\Facades\Input;
 
-use \App\RepairTimings;
+use \App\RepairTiming;
 
 
 class RepairsController extends Controller
@@ -197,7 +197,7 @@ class RepairsController extends Controller
       'repair_id' => $repair->id
     ]);
 
-    repairTimings::create([
+    repairTiming::create([
       'repair_id'=>$repair->id
     ]);
 

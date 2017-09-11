@@ -9,7 +9,7 @@ use \App\Repair;
 use \App\Phone;
 use \App\Payment;
 use \App\City;
-use \App\repairTimings;
+use \App\RepairTiming;
 
 class AdminController extends Controller
 {
@@ -35,7 +35,7 @@ class AdminController extends Controller
 
       foreach($average_times as $repair)
       {
-        $timings[] = repairTimings::getCompletionTime($repair->id);
+        $timings[] = RepairTiming::getCompletionTime($repair->id);
       }
 
       $timings = array_filter($timings);

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class repairTimings extends Model
+class RepairTiming extends Model
 {
   protected $guarded = [];
 
