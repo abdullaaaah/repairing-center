@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Input;
 
 use \App\RepairTiming;
 
+use \App\Fault;
+
+use \App\Phone;
+
 
 class RepairsController extends Controller
 {
@@ -23,7 +27,9 @@ class RepairsController extends Controller
   public function issue()
   {
 
-    $data = [];
+    $faults = Fault::all();
+
+    $data = compact('faults');
 
     $params = [
 
@@ -36,10 +42,12 @@ class RepairsController extends Controller
 
   }
 
-  public function selectBrand()
+  public function selectBrand(Fault $fault)
   {
 
-    $data = [];
+    $brands = PhoneMake::all();
+
+    $data = compact('fault', 'brands');
 
     $params = [
 
@@ -52,7 +60,7 @@ class RepairsController extends Controller
 
   }
 
-  public function selectPhone(\App\PhoneMake $brand)
+  public function selectPhone($fault, PhoneMake $brand)
   {
 
     $countries = \App\Country::all();
@@ -65,7 +73,7 @@ class RepairsController extends Controller
       }
     });
 
-    $data = compact('phones', 'countries');
+    $data = compact('phones', 'countries', 'fault');
 
     $params = [
 
@@ -98,10 +106,10 @@ class RepairsController extends Controller
     ]);
 
 
-    return redirect(route('create-repair', request()->phone_id));
+    return redirect(route('create-repair', [ request()->fault_id, request()->phone_id ]));
   }
 
-  public function create(\App\Phone $phone)
+  public function create($fault_id, Phone $phone)
   {
 
     $country_code = session('country_id') == 1 ? 'UK' : 'UAE';
@@ -141,7 +149,7 @@ class RepairsController extends Controller
     $phone_country_code = session('country_id') == 1 ? '+44' : '+971';
 
 
-    $data = compact('amount','payment_methods', 'amount_id', 'phone_country_code', 'country_code');
+    $data = compact('amount','payment_methods', 'amount_id', 'phone_country_code', 'country_code', 'fault_id');
 
     $params = [
 
@@ -190,6 +198,9 @@ class RepairsController extends Controller
    $repair = Repair::create($everything);
 
    $ref = $repair->booking_reference = Repair::generateBookingReference($repair);
+   $repair->save();
+
+   $repair->fault_id = request()->fault_id;
    $repair->save();
 
     \App\Tracking::create([

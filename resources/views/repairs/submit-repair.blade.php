@@ -52,6 +52,8 @@
 <div class="container">
 
 <form method="post" action="{{route('store-repair')}}">
+  <input type="hidden" name="fault_id" value="{{$fault_id}}" />
+
   <div class="row">
 
     <div class="col-sm-12">
@@ -129,9 +131,16 @@
 
       <label for="phone-model-number">Phone #</label>
 
+      <div class="input-group input-group-sm">
+          <div class="input-group-addon">{{ $phone_country_code }}</div>
+          <input type="text" class="form-control" id="phone-number-field" name="contact_phone_number" placeholder="000 000 0000" required style="height:40px;">
+      </div>
+
+
+     <!--
       <div class="form-row">
 
-        <div class="col-md-2">
+        <div class="input-group col-md-2">
           <input type="text" class="form-control" name="phone_country_code" value="{{ $phone_country_code }}" readonly/>
         </div>
 
@@ -140,6 +149,8 @@
         </div>
 
       </div>
+
+    -->
 
     </div>
 

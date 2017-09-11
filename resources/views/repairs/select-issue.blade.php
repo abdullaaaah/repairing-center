@@ -24,37 +24,32 @@
 
 <div class="container">
 
-  <div class="row phone-makes">
+  @if(count($faults))
 
-    <div class="col-sm-12">
+    @foreach($faults as $fault)
 
-      <a href="{{route('select-brand')}}"><div class="identify-box" id="replace">REPLACE MY LCD
-        <!--<img class="img-responsive img-custom" src="" />-->
-      </div></a>
+    <div class="row phone-makes" style="margin-bottom:60px;">
 
-    </div>
+      <div class="col-sm-12">
 
-  </div>
+        <a href="{{route('select-brand', $fault->id )}}"><div class="identify-box"> {{ $fault->name }}
+          <!--<img class="img-responsive img-custom" src="" />-->
+        </div></a>
 
-  <div class="row phone-makes">
-
-    <div class="col-sm-12">
-
-      <div class="identify-box" id="option-2">BATTERY REPLACEMENT</div>
+      </div>
 
     </div>
 
-  </div>
 
-  <div class="row phone-makes">
+    @endforeach
 
-    <div class="col-sm-12">
+  @else
 
-      <div class="identify-box" style="margin-bottom:40px;" id="option-3">HOUSING REPLACEMENT</div>
+  <p>
+    Try again later.
+  </p>
 
-    </div>
-
-  </div>
+  @endif
 
 </div>
 

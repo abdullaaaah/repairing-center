@@ -32,6 +32,7 @@
     <input type="hidden" name="quote_id" id="quote_id" value="" />
     <input type="hidden" name="variation_id" id="variation-field" value="" />
     <input type="hidden" name="city_id" id="city-field" value="" />
+    <input type="hidden" name="fault_id" value={{$fault}} />
 
     <div class="row">
 
@@ -151,7 +152,7 @@
     <div class="row" id="step-two-btn-row" style="margin-bottom:80px; margin-top:40px">
       <div class="col-sm-12">
 
-        <a href="{{route('select-brand')}}"><button type="button" class="btn btn-danger btn-lg" id="">GO BACK</button></a>
+        <a href="{{route('select-brand', $fault)}}"><button type="button" class="btn btn-danger btn-lg" id="">GO BACK</button></a>
         <button type="submit" class="btn btn-primary btn-lg" id="">NEXT</button>
 
 

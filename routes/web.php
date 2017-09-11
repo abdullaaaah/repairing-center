@@ -22,13 +22,13 @@ Route::post('/contact', 'PagesController@sendContactMail')->name('send-contact-m
 
 Route::get('/repairs/issue', 'RepairsController@issue')->name('repair');
 
-Route::get('/repairs/brands',  'RepairsController@selectBrand')->name('select-brand');
+Route::get('/repairs/fault/{fault}/brands',  'RepairsController@selectBrand')->name('select-brand');
 
-Route::get('/repairs/brand/{brand}/phones', 'RepairsController@selectPhone')->name('select-phone');
+Route::get('/repairs/fault/{fault}/brand/{brand}/phones', 'RepairsController@selectPhone')->name('select-phone');
 
 Route::post('/repairs/phone/store', 'RepairsController@storePhone')->name('store-phone');
 
-Route::get('/repairs/phone/{phone}/create', 'RepairsController@create')->name('create-repair');
+Route::get('/repairs/fault/{fault}/phone/{phone}/create', 'RepairsController@create')->name('create-repair');
 
 Route::post('/repairs', 'RepairsController@store')->name('store-repair');
 

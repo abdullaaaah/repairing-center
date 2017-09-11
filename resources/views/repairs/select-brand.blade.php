@@ -24,60 +24,68 @@
 
 <div class="container">
 
-  <div class="row phone-makes">
 
-    <div class="col-sm-6">
+  @for($i = 0; $i < count($brands); $i++)
 
-      <a href="{{route('select-phone', \App\PhoneMake::findByName('apple') )}}">
+    @if( !($i % 2) )
 
-      <div class="phone-makes-box">
+    <div class="row phone-makes">
 
-      APPLE
+      <div class="col-sm-6">
 
-      <img class="img-responsive img-custom" src="\img\iphone.png" />
+        <a href="{{route('select-phone', [ $fault->id, $brands[$i]->id ] )}}">
 
+        <div class="phone-makes-box">
+
+        {{strtoupper($brands[$i]->phone_model)}}
+
+        <img class="img-responsive img-custom" src="\img\iphone.png" />
+
+
+        </div>
+
+        </a>
 
       </div>
 
+    @else
+
+    <div class="col-sm-6">
+
+      <a href="{{route('select-phone', [ $fault->id, $brands[$i]->id ] )}}">
+
+          <div class="phone-makes-box">
+
+            {{strtoupper($brands[$i]->phone_model)}}
+
+          <img class="img-responsive img-custom" src="\img\samsung.png" />
+
+        </div>
+
       </a>
 
+      </div>
+
+    </div><!-- end row-->
+
+    @endif
+
+  @endfor
+
+  @if( (count($brands) % 2 ) )
     </div>
+  @endif
 
-    <div class="col-sm-6">
 
-      <a href="{{route('select-phone', \App\PhoneMake::findByName('samsung') )}}"><div class="phone-makes-box">SAMSUNG
-        <img class="img-responsive img-custom" src="\img\samsung.png" />
-      </div></a>
+  <div style="margin-top:40px;"></div>
 
-    </div>
-
-  </div>
+<!--
 
   <div class="row phone-makes">
 
     <div class="col-sm-6">
 
-      <a href="{{route('select-phone', \App\PhoneMake::findByName('htc') )}}"><div class="phone-makes-box">HTC
-        <img class="img-responsive img-custom" src="\img\htc.png" />
-      </div></a>
-
-    </div>
-
-    <div class="col-sm-6">
-
-      <a href="{{route('select-phone', \App\PhoneMake::findByName('blackberry') )}}"><div class="phone-makes-box">BLACKBERRY
-        <img class="img-responsive img-custom" src="\img\blackberry.png" />
-      </div></a>
-
-    </div>
-
-  </div>
-
-  <div class="row phone-makes">
-
-    <div class="col-sm-6">
-
-      <a href="{{route('select-phone', \App\PhoneMake::findByName('sony') )}}"><div class="phone-makes-box">SONY
+      <a href="{{route('select-phone', [$fault->id, \App\PhoneMake::findByName('sony')] )}}"><div class="phone-makes-box">SONY
         <img class="img-responsive img-custom" src="\img\sony.png" />
       </div></a>
 
@@ -91,8 +99,7 @@
 
     </div>
 
-  </div>
-
+  </div>-->
 
 </div>
 
