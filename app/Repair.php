@@ -22,6 +22,11 @@ class Repair extends Model
       'contact_postal_code'
     ];
 
+    public function fault()
+    {
+      return $this->belongsTo('\App\Fault');
+    }
+
     public function trackings()
     {
       return $this->hasMany('\App\Tracking', 'repair_id');
@@ -342,6 +347,11 @@ class Repair extends Model
         return false;
       }
 
+    }
+
+    public function getFault()
+    {
+      return strtoupper($this->fault->name);
     }
 
 

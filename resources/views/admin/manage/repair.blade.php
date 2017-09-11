@@ -20,6 +20,10 @@
       Payment has not yet been made.
     </div>
 
+    <p>
+      This shit aint accepted, son!
+    </p>
+
     @else
 
       <h4>Transaction details</h4>
@@ -53,6 +57,39 @@
       </div>
 
     @endif
+
+  @elseif( !\App\Repair::isRepairAccepted($repair) )
+
+  <div class="row">
+
+    <div class="col-md-4">
+
+      <form method="post" action="{{route('accept-repair', $repair->id)}}">
+
+        {{method_field("PATCH")}}
+
+        {{csrf_field()}}
+
+        <input type="hidden" name="tracking_status" value="" />
+
+        <div class="form-group">
+          <button class="btn btn-success" type="submit" style="width:100%;"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
+        </div>
+
+      </form>
+
+    </div>
+
+    <div class="col-md-4">
+      <form method="post" action="{{route('reject-repair', $repair->id)}}">
+        {{ method_field("PATCH") }}
+        {{ csrf_field() }}
+        <button class="btn btn-danger" type="submit" style="width:100%"><i class="fa fa-times" aria-hidden="true"></i> Reject</button>
+      </form>
+    </div>
+
+
+  </div>
 
   @else
 
@@ -239,7 +276,7 @@
 
           <th>TYPE OF REPAIR</th>
 
-          <td>LCD REPLACEMENT</td>
+          <td> {{ $repair->getFault() }} </td>
 
         </tr>
 
