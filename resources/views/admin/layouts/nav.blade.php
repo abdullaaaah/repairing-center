@@ -33,6 +33,7 @@
             <a class="dropdown-item" href="{{route('create-phone')}}">View Phones</a>
             <a class="dropdown-item" href="{{ route('manage-location') }}">Locations</a>
             <a class="dropdown-item" href="{{route('create-fault')}}">Faults</a>
+            <a class="dropdown-item" href="{{route('create-brand')}}">Brands</a>
           </div>
       </li>
 

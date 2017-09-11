@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PhoneMake extends Model
 {
 
-  protected $fillable = ['phone_model'];
+  protected $fillable = ['phone_model', 'image_url'];
   public $timestamps = false;
 
   public function phones() {

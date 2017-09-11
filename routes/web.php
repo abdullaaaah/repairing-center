@@ -191,3 +191,12 @@ Route::get('/admin/faults/create', 'FaultController@create')->name('create-fault
 Route::post('/admin/faults', 'FaultController@store')->name('store-fault');
 
 Route::delete('/admin/faults/{fault}', 'FaultController@delete')->name('delete-fault');
+
+//brands
+Route::get('/admin/brands/create', 'PhoneMakesController@create')->name('create-brand');
+
+Route::post('/admin/brands', 'PhoneMakesController@store')->name('store-brand');
+
+Route::patch('/admin/brands/{brand}', 'PhoneMakesController@edit')->name('edit-brand');
+
+Route::delete('/admin/brands/{brand}', 'PhoneMakesController@delete')->name('delete-brand');

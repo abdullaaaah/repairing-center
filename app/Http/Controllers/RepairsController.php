@@ -190,7 +190,6 @@ class RepairsController extends Controller
      $contact['contact_postal_code'] = 0;
    }
 
-
    $repair_data = $request->session()->all();
 
    $everything = array_merge($contact, $repair_data);

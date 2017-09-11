@@ -39,7 +39,7 @@
 
         {{strtoupper($brands[$i]->phone_model)}}
 
-        <img class="img-responsive img-custom" src="\img\iphone.png" />
+        <img class="img-responsive img-custom" src="{{$brands[$i]->image_url}}" />
 
 
         </div>
@@ -58,7 +58,7 @@
 
             {{strtoupper($brands[$i]->phone_model)}}
 
-          <img class="img-responsive img-custom" src="\img\samsung.png" />
+          <img class="img-responsive img-custom" src="{{$brands[$i]->image_url}}" />
 
         </div>
 
