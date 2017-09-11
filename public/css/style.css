@@ -475,3 +475,7 @@ form select
   font-weight:900;
   font-size:3.3rem;
 }
+
+.table-responsive {
+  display:table;
+}

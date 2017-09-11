@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top" id="navbar">
+<nav class="navbar navbar-toggleable-md navbar-expand-md navbar-dark fixed-top" id="navbar">
   <div class="container">
 
     <a class="navbar-brand" href="#" id="navbar-brand" style="color:#179eed">Repairing.Center</a>

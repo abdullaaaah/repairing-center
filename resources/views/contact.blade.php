@@ -9,7 +9,7 @@ _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
 $.src="https://v2.zopim.com/?56HqI1aSBCJ9Es9u90peWOyUY5WtIWQ7";z.t=+new Date;$.
 type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 </script>
-<!--End of Zendesk Chat Script-->>
+<!--End of Zendesk Chat Script-->
 @endsection
 
 @section('content')

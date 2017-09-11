@@ -102,7 +102,7 @@ Route::delete('/admin/inventory/phone/{phone}', 'AdminPhonesController@delete');
 
 Route::get('/admin/inventory/phone/{phone}', 'AdminPhonesController@show'); //also create variations here
 
-Route::get('/admin/inventory/phones/create', 'AdminPhonesController@create');
+Route::get('/admin/inventory/phones/create', 'AdminPhonesController@create')->name('create-phone');
 
 Route::post('/admin/inventory/phones', 'AdminPhonesController@store');
 
@@ -184,3 +184,6 @@ Route::patch('/admin/manage/repair/{repair}/accept', 'AdminRepairsController@acc
 Route::patch('/admin/manage/repair/{repair}/reject', 'AdminRepairsController@reject')->name('reject-repair');
 
 Route::patch('/admin/manage/repair/{repair}/complete', 'AdminRepairsController@complete')->name('complete-repair');
+
+//faults
+Route::get('/admin/faults/create', 'FaultController@create')->name('create-fault');

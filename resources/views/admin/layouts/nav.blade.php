@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top" id="navbar">
+<nav class="navbar navbar-toggleable-md navbar-expand-md navbar-dark fixed-top" id="navbar">
   <div class="container">
 
-    <a class="navbar-brand" href="#">Admin Panel</a>
+    <a class="navbar-brand" href="#" style="color:white">Admin Panel</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,56 +10,55 @@
       <ul class="navbar-nav ml-auto">
 
         @if (Auth::guest())
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('login') }}">LOGOUT</a>
-        </li>
+
         @else
 
-        <li class="nav-item {{ $is_page_active['admin_home'] ? 'active' : '' }}">
-          <a class="nav-link" href="/admin/home">HOME</a>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/home">Home</a>
         </li>
-
-        <li class="nav-item {{ $is_page_active['manage'] ? 'active' : '' }}">
-          <a class="nav-link" href="/admin/manage">MANAGE REPAIRS</a>
-        </li>
-
-        <li class="nav-item {{ $is_page_active['inventory'] ? 'active' : '' }}">
-          <a class="nav-link" href="/admin/inventory">INVENTORY</a>
-        </li>
-
-        <li class="nav-item {{ $is_page_active['location'] ? 'active' : '' }}">
-          <a class="nav-link" href="{{ route('manage-location') }}">MANAGE LOCATIONS</a>
-        </li>
-
-        @if(Auth::user()->level == 1)
-
-        <li class="nav-item {{ $is_page_active['create-admin-account'] ? 'active' : '' }}">
-          <a class="nav-link" href="{{ route('create-admin-account') }}">ADMIN ACCOUNTS</a>
-        </li>
-
-        @endif
-
-        <li class="nav-item {{ $is_page_active['settings'] ? 'active' : '' }}">
-          <a class="nav-link" href="{{ route('settings', Auth::user()->id) }}">SETTINGS</a>
-        </li>
-
-
-        <!--<li class="nav-item {{ $is_page_active['sales'] ? 'active' : '' }}">
-          <a class="nav-link" href="/admin/sales">SALES</a>
-        </li>-->
 
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('logout') }}"
-                onclick="event.preventDefault();
-                         document.getElementById('logout-form').submit();">
-                LOGOUT
-            </a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                {{ csrf_field() }}
-            </form>
-
+          <a class="nav-link" href="/admin/manage">Bookings</a>
         </li>
+
+
+        <style>.dropdown-item{
+          color:black !important;
+        }</style>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" href="{{route('show-brands-admin')}}">Add Phones</a>
+            <a class="dropdown-item" href="{{route('create-phone')}}">View Phones</a>
+            <a class="dropdown-item" href="{{ route('manage-location') }}">Locations</a>
+            <a class="dropdown-item" href="{{route('create-fault')}}">Faults</a>
+          </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em>Hello, Admin</em></a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          @if(Auth::user()->level == 1)
+          <a class="dropdown-item" href="{{ route('create-admin-account') }}">Users</a>
+          @endif
+          <a class="dropdown-item" href="{{ route('settings', Auth::user()->id) }}">Settings</a>
+
+          <a class="dropdown-item" href="{{ route('logout') }}"
+              onclick="event.preventDefault();
+                       document.getElementById('logout-form').submit();">
+              Log out
+
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  {{ csrf_field() }}
+              </form>
+
+
+          </a>
+
+
+        </div>
+    </li>
 
 
         @endif
