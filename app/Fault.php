@@ -4,9 +4,23 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Fault extends Model
 {
-    public function repairs {
-      $this->hasMany('\App\Repair');
-    }
+  use SoftDeletes;
+
+  protected $guarded = [];
+
+  protected $dates = ['deleted_at'];
+
+  public function repairs() {
+    return $this->hasMany('\App\Repair');
+  }
+
+  public function getBookingCount()
+  {
+    return count($this->repairs);
+  }
+
 }

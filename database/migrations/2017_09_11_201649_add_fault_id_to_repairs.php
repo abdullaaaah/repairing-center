@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFaultsTable extends Migration
+class AddFaultIdToRepairs extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateFaultsTable extends Migration
      */
     public function up()
     {
-        Schema::create('faults', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('repairs', function (Blueprint $table) {
+            $table->integer('fault_id')->default(1);
         });
     }
 
@@ -28,6 +25,8 @@ class CreateFaultsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('faults');
+        Schema::table('repairs', function (Blueprint $table) {
+            $table->dropColumn('fault_id');
+        });
     }
 }

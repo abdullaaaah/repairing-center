@@ -187,3 +187,7 @@ Route::patch('/admin/manage/repair/{repair}/complete', 'AdminRepairsController@c
 
 //faults
 Route::get('/admin/faults/create', 'FaultController@create')->name('create-fault');
+
+Route::post('/admin/faults', 'FaultController@store')->name('store-fault');
+
+Route::delete('/admin/faults/{fault}', 'FaultController@delete')->name('delete-fault');
