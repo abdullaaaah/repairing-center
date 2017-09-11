@@ -27,20 +27,7 @@ class AdminController extends Controller
       $payment_count = count( Payment::all() );
       $rejection_count = count( Repair::where('is_accepted', '=', 2)->get() );
       $completion_count = count( Repair::where('is_completed', '=', 1)->get() );
-
-      $average_times = Repair::where('is_completed', '=', 1)->get();
-      //$average_repair_time = ;
-
-      $timings = array();
-
-      foreach($average_times as $repair)
-      {
-        $timings[] = RepairTiming::getCompletionTime($repair->id);
-      }
-
-      $timings = array_filter($timings);
-      $average_time = array_sum($timings)/count($timings);
-      $average_time = round($average_time,1);
+      $average_time = RepairTiming::getAverageTime();
 
       $attention = [];
 
