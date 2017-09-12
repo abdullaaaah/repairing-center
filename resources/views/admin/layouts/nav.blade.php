@@ -34,6 +34,7 @@
             <a class="dropdown-item" href="{{ route('manage-location') }}">Locations</a>
             <a class="dropdown-item" href="{{route('create-fault')}}">Faults</a>
             <a class="dropdown-item" href="{{route('create-brand')}}">Brands</a>
+            <a class="dropdown-item" href="{{route('show-payments')}}">Online Transactions</a>
           </div>
       </li>
 

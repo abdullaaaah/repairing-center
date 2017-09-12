@@ -200,3 +200,7 @@ Route::post('/admin/brands', 'PhoneMakesController@store')->name('store-brand');
 Route::patch('/admin/brands/{brand}', 'PhoneMakesController@edit')->name('edit-brand');
 
 Route::delete('/admin/brands/{brand}', 'PhoneMakesController@delete')->name('delete-brand');
+
+//payment
+
+Route::get('/admin/payments/paypal', 'AdminPaymentsController@show')->name('show-payments');

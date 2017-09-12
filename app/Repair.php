@@ -354,5 +354,8 @@ class Repair extends Model
       return strtoupper($this->fault->name);
     }
 
-
+    public function getPostalCode()
+    {
+      return strtoupper($this->contact_postal_code);
+    }
 }

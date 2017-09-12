@@ -329,7 +329,7 @@
             </th>
 
             <td>
-              {{$repair->postal_code}}
+              {{$repair->getPostalCode()}}
             </td>
           </tr>
         @endif
