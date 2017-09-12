@@ -32,7 +32,7 @@
   @endif
 
 
-  @if(Auth::user()->access_uae)
+  @if(Auth::user()->access_uk)
   <h4 style="margin-top:20px;">UK</h4>
 
   <div class="row">
