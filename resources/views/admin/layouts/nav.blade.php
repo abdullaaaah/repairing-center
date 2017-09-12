@@ -29,8 +29,8 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" href="{{route('show-brands-admin')}}">Add Phones</a>
-            <a class="dropdown-item" href="{{route('create-phone')}}">View Phones</a>
+            <a class="dropdown-item" href="{{route('create-phone')}}">Add Phones</a>
+            <a class="dropdown-item" href="{{route('show-brands-admin')}}">View Phones</a>
             <a class="dropdown-item" href="{{ route('manage-location') }}">Locations</a>
             <a class="dropdown-item" href="{{route('create-fault')}}">Faults</a>
             <a class="dropdown-item" href="{{route('create-brand')}}">Brands</a>

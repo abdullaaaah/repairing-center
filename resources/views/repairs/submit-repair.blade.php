@@ -85,18 +85,6 @@
     </div>
   </div>
 
-  <div class="row">
-
-    <div class="col-sm-12">
-
-      <div class="form-group">
-        <label for="phone-model-number">Address</label>
-        <input type="text" class="form-control" id="address-field" name="contact_address" placeholder="74 magical street" required>
-      </div>
-
-    </div>
-  </div>
-
   @if($country_code == "UK")
 
   <div class="row">
@@ -110,8 +98,21 @@
 
     </div>
   </div>
-
+  
   @endif
+
+  <div class="row">
+
+    <div class="col-sm-12">
+
+      <div class="form-group">
+        <label for="phone-model-number">Address</label>
+        <input type="text" class="form-control" id="address-field" name="contact_address" placeholder="74 magical street" required>
+      </div>
+
+    </div>
+  </div>
+
 
   <div class="row">
 

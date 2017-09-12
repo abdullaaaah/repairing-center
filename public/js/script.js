@@ -142,6 +142,21 @@ $(document).ready(function() {
 
   });
 
+  //uk api
+
+  $("#address-field").click(function() {
+
+    $.get("https://api.getAddress.io/find/" + $("#postal-code-field").val().replace(/\s+/g, '') + "?api-key=sQTyz3d7mE2w2Gm2XdJOUQ10150", function(data, status){
+
+      $(this).val(data.addresses[1]);
+      $(this).val(data.addresses[1]);
+      $("#address-field").val(data.addresses[1]);
+
+
+    });
+
+  });
+
 
 
 });

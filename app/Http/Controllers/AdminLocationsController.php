@@ -87,9 +87,4 @@ class AdminLocationsController extends Controller
 
     }
 
-    public function getJsonCities(Country $country)
-    {
-      return City::getCitiesAlpha($country->id);
-    }
-
 }

@@ -79,42 +79,44 @@
 <h4>Brief summary of events</h4>
 
 <div class="row">
-  <table class="table table-responsive table-custom table-two-col">
-    <tbody>
-      <tr>
+  <div class="table-responsive">
+    <table class="table table-custom table-two-col">
+      <tbody>
+        <tr>
 
-        <th>Total Repairs Completed</th>
+          <th>Total Repairs Completed</th>
 
-        <td>{{$completion_count}}</td>
+          <td>{{$completion_count}}</td>
 
-      </tr>
+        </tr>
 
-      <tr>
-        <th>Total Repairs Rejected</th>
+        <tr>
+          <th>Total Repairs Rejected</th>
 
-        <td>{{$rejection_count}}</td>
-      </tr>
+          <td>{{$rejection_count}}</td>
+        </tr>
 
-      <tr>
-        <th>Total Quotes</th>
+        <tr>
+          <th>Total Quotes</th>
 
-        <td>{{$total_bookings}}</td>
-      </tr>
+          <td>{{$total_bookings}}</td>
+        </tr>
 
-      <tr>
-        <th>Average Repairing Time</th>
+        <tr>
+          <th>Average Repairing Time</th>
 
-        <td>{{$average_time}} Hour(s)</td>
-      </tr>
+          <td>{{$average_time}} Hour(s)</td>
+        </tr>
 
-      <tr>
-        <th>Total Online Payments</th>
+        <tr>
+          <th>Total Online Payments</th>
 
-        <td>{{$payment_count}}</td>
-      </tr>
+          <td>{{$payment_count}}</td>
+        </tr>
 
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <h4>Things needing your attention</h4>

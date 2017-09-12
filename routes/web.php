@@ -152,7 +152,7 @@ Route::delete('/admin/location/city/{city}', 'AdminLocationsController@deleteCit
 
 Route::patch('/admin/location/city/{city}', 'AdminLocationsController@editCity')->name('edit-city');
 
-Route::get('/country/{country}/cities', 'AdminLocationsController@getJsonCities');
+Route::get('/country/{country}/cities', 'LocationsController@getJsonCities');
 
 //paypal routes
 
