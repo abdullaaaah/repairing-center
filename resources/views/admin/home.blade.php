@@ -131,19 +131,20 @@
   </p>
 
   @foreach($attention['phones_with_no_quotes'] as $phone)
-  <a href="{{route('manage-pricing', $phone->id)}}">{{$phone->model}}</a>
+  <a href="{{route('manage-pricing', $phone->id)}}">{{$phone->model}}</a><br />
   @endforeach
+
 
   @endif
 
   @if( isset($attention['cities_without_payment']) )
 
-    <p>
+    <p style="margin-top:20px;">
       These cities have no payment method available. Please fix this as it can create problems for client side website.
     </p>
 
     @foreach($attention['cities_without_payment'] as $city)
-    <a href="{{route('manage-country', $city->country->id)}}">{{$city->name}}</a>
+    <a href="{{route('manage-country', $city->country->id)}}">{{$city->name}}</a><br />
     @endforeach
   @endif
 
