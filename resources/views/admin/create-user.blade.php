@@ -117,6 +117,14 @@
         </th>
 
         <th>
+          UK Access
+        </th>
+
+        <th>
+          UAE Access
+        </th>
+
+        <th>
           Delete
         </th>
       </tr>
@@ -133,6 +141,15 @@
         <td>
           {{$user->email}}
         </td>
+        
+        <td>
+          {{$user->getUkAccess() }}
+        </td>
+
+        <td>
+          {{$user->getUaeAccess() }}
+        </td>
+
 
         <td>
           @if( $user->id == Auth::user()->id)

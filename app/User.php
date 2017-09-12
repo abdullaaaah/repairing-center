@@ -65,6 +65,26 @@ class User extends Authenticatable
       }
     }
 
+    public function getUaeAccess()
+    {
+      if($this->access_uae)
+      {
+        return "Yes";
+      } else {
+        return "No";
+      }
+    }
+
+    public function getUKAccess()
+    {
+      if($this->access_uk)
+      {
+        return "Yes";
+      } else {
+        return "No";
+      }
+    }
+
 
 
 

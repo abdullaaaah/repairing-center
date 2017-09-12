@@ -57,19 +57,21 @@ $(document).ready(function() {
    $("#step-two-variations").html("<option>Select</option>");
 
 
+   if(Variations[0])
+   {
+     selectedVariation = Variations[0].id;
 
-   selectedVariation = Variations[0].id;
+     $('#step-two-variations').html("<option value='" + Variations[0].id + "' class='variations-option' selected> Select </option>");
+   }
 
-   $('#step-two-variations').html("<option value='" + Variations[0].id + "' class='variations-option' selected> Select </option>");
 
-
-   for(var i = 1; i < Variations.length; i++ )
+   for(var i = 0; i < Variations.length; i++ )
    {
 
      $('#step-two-variations').append($('<option>', {
 
        value: Variations[i].id,
-       text: Variations[i].color + ", " + Variations[i].capacity + " GB"
+       text: Variations[i].color
 
      })).find("option").addClass('variations-option');
 

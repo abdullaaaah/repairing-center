@@ -21,7 +21,7 @@
           </div>
         </div>
 
-        <p class="lead constrain-width mt-4" style="display:none;" id="price-p"><strong style="font-weight:900"><i class="fa fa-info-circle" aria-hidden="true"></i> Your total is {{$amount}}</strong>, <em>but you don't have to pay this amount until the repair is finished.</em></p>
+        <p class="lead constrain-width mt-4" style="display:none;" id="price-p"><strong style="font-weight:900"><i class="fa fa-info-circle" aria-hidden="true"></i> The best available quote for your repair is {{$amount}}</strong>, <em>We assure you the parts being used for your repair are the highest quality and tested by our professional team of technicians.</em></p>
         <div class="divider"></div>
       </div>
 
@@ -98,7 +98,7 @@
 
     </div>
   </div>
-  
+
   @endif
 
   <div class="row">

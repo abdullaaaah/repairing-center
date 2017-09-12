@@ -479,3 +479,7 @@ form select
 .table-responsive {
   display:table;
 }
+
+.form-control::placeholder {
+  color:silver;
+}
