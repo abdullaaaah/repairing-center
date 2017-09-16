@@ -138,21 +138,6 @@
       </div>
 
 
-     <!--
-      <div class="form-row">
-
-        <div class="input-group col-md-2">
-          <input type="text" class="form-control" name="phone_country_code" value="{{ $phone_country_code }}" readonly/>
-        </div>
-
-        <div class="col-md-10">
-          <input type="text" class="form-control" id="phone-number-field" name="contact_phone_number" placeholder="000 000 0000" required>
-        </div>
-
-      </div>
-
-    -->
-
     </div>
 
   </div>

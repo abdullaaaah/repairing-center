@@ -96,7 +96,7 @@
         <h4 style="font-size:12px; margin-top:20px;"><i class="fa fa-phone" aria-hidden="true"></i> Phone</h4>
           <p>
           +44 7427629701<br/>
-          +44 7999999876
+           +44 7905955555 
           </p>
 
         <h4 class="pt-2">United Arab Emirates</h4>

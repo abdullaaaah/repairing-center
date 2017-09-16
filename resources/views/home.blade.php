@@ -28,6 +28,11 @@ body {padding-top:0px;}
   margin-left:0px;
 }
 
+.banner-top div {
+  color:#179EED;
+  border-bottom:1px solid #eee;
+}
+
 </style>
 
 <section class="cover-1 text-center" id="home-section-1">
@@ -36,7 +41,7 @@ body {padding-top:0px;}
         <h1 class="jumbotron-heading">Say <em>hello</em> to <strong>Online Repairing</strong></h1>
         <p class="lead"><strong>Broken phone?</strong> We collect, fix & deliver directly to you!</p>
         <p>
-          <a href="{{route('repair')}}" class="btn btn-primary btn-lg mb-2 mr-2 ml-2">REPAIR TODAY</a>
+          <a href="{{route('repair')}}" class="btn btn-primary btn-lg mb-2 mr-2 ml-2" style="background-color:#99d954; border-color:#99d954";>GET FREE QUOTE</a>
           <a href="{{route('about')}}" class="btn btn-outline-white btn-lg mb-2 ml-2 ml-2">LEARN MORE</a>
         </p>
     </div>

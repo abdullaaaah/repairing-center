@@ -483,3 +483,73 @@ form select
 .form-control::placeholder {
   color:silver;
 }
+
+.navbar {
+  padding-top:40px;
+}
+
+.banner-top div {
+  padding-bottom:5px;
+  color:white;
+  border-bottom:1px solid lightblue;
+  display: block;
+  padding-left:2px;
+}
+
+.banner-top {
+  position: relative;
+  margin-bottom:30px;
+  margin-top:-30px;
+  width:100%;
+  display:block;
+  position: absolute;
+  margin-bottom:20px;
+  padding-bottom:30px;
+}
+
+@media(max-width:992px)
+{
+  .banner-top {
+    margin-left:-14px;
+  }
+
+  button.navbar-toggler {
+    float:right;
+    margin-top:12px;
+    color:White !important;
+    border-color: white !important;
+  }
+
+  .button.nav  {
+    color:white !important;
+    border-color:white !important;
+    background-color:White !important;
+  }
+}
+
+@media(max-width:575px)
+{
+  .banner-top{
+    text-align: center;
+  }
+}
+
+
+@media(max-width:340px)
+{
+  .banner-top{
+    text-align: center;
+  }
+
+    button.navbar-toggler {
+    float:inherit;
+    text-align: center;
+    display:block;
+    margin: 0 auto;
+  }
+
+  section.header-section.text-center {
+    height:250px;
+    padding-top:50px
+  }
+}
