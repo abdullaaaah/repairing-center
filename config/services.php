@@ -36,8 +36,8 @@ return [
     ],
 
     'paypal' => [
-	      'client_id' => 'AdT9YwIPQMIBMfadkaqNqtQnP7yXRBfHA6WMVv2CH5vDTeZZ5qqBGn7Gid9Ajt9BCdM3Ueo9bQ49X6_m',
-	      'secret' => 'EAzDB3CBojsXsfgVJcRUBu7_wn-y1-S0kWVtba7gMkRV3zZzRlXoEUufFWjqyYcTOTF5Rk9hk735a_ZZ'
+	      'client_id' => 'AS1z9CWySUO4HjcLrfOK-J1Q8yZNAlP9djQlVahnL8mduSMY1lTrLNuplPa1JV2oEWYAxfbmebm_U7qw',
+	      'secret' => 'EKyTeTddYgVOAIJFTWyo6k60CXGb1b8sFfP8_6zO58chIk_An4acPb5nmqKlQFKdkhDfesHzHNdOVjgW'
        ],
 
 ];

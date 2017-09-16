@@ -85,7 +85,7 @@
     </div>
   </div>
 
-  @if($country_code == "UK")
+  @if($country_id == 1)
 
   <div class="row">
 

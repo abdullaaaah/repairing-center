@@ -20,10 +20,6 @@
       Payment has not yet been made.
     </div>
 
-    <p>
-      This shit aint accepted, son!
-    </p>
-
     @else
 
       <h4>Transaction details</h4>

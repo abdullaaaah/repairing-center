@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Quote extends Model
 {
 
-  protected $fillable = ['phone_id', 'country_code', 'price'];
+  protected $fillable = ['phone_id', 'price', 'fault_id', 'country_id'];
 
   public function Phone()
   {
@@ -16,19 +16,43 @@ class Quote extends Model
 
   }
 
-  public static function formatQuote($country_code = "", $amt = 0)
+  public function country()
   {
+    return $this->belongsTo('\App\Country', 'country_id');
+  }
 
-    if($country_code == "UK")
-    {
-      return '£'.$amt;
-    }
+  public function fault()
+  {
+    return $this->belongsTo('\App\Fault');
+  }
 
-    if($country_code == "UAE")
-    {
-      return $amt . " AED";
-    }
+  public function getCountry()
+  {
+    return $this->country->name;
+  }
 
+  public function getService()
+  {
+    return $this->fault->name;
+  }
+
+  public function getQuote()
+  {
+    return self::formatQuoteNew($this->country_id, $this->price);
+  }
+
+  public function formatQuoteNew($country_id, $amount)
+  {
+    return Country::find($country_id)->currency . "$amount";
+  }
+
+  public static function deleteExisting($country_id, $fault_id, $phone_id)
+  {
+    return Quote::where([
+      ['country_id', '=', $country_id],
+      ['fault_id', '=', $fault_id],
+      ['phone_id', '=', $phone_id]
+    ])->delete();
   }
 
 }

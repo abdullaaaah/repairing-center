@@ -55,6 +55,7 @@ class Phone extends Model
     }
   }
 
+  //deprecated
   public function getQuote($country_code)
   {
 
@@ -99,6 +100,23 @@ class Phone extends Model
     } else {
       return false;
     }
+
+  }
+
+  public static function whereQuoteSet($fault_id)
+  {
+
+    $phones = array_filter( iterator_to_array( self::all() ), function($phone) use ($fault_id) {
+
+      $stmt = count($phone->quotes->where('fault_id', '=', $fault_id));
+
+      if( $stmt >= 2 )
+      {
+        return true;
+      }
+    });
+
+    return $phones;
 
   }
 

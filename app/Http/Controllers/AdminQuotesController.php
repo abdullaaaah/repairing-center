@@ -8,6 +8,10 @@ use \App\Quote;
 
 use \App\Phone;
 
+use \App\Fault;
+
+use \App\Country;
+
 
 class AdminQuotesController extends Controller
 {
@@ -20,17 +24,18 @@ class AdminQuotesController extends Controller
     public function index(Phone $phone)
     {
 
-      $ukQuote = $phone->getQuote("UK");
-      $uaeQuote = $phone->getQuote("UAE");
+      /*$ukQuote = $phone->getQuote("UK");
+      $uaeQuote = $phone->getQuote("UAE");*/
 
-      $data = compact('phone', 'uaeQuote', 'ukQuote');
+      $countries = Country::all();
 
-      $params = [
-        'is_page_active' => PagesController::isPageActive('manage'),
-        'page_title' => "Pricing"
-      ];
+      $faults = Fault::all();
 
-      return view('admin.inventory.pricing', array_merge($data, $params));
+      $quotes = Quote::where('phone_id', '=', $phone->id)->get();
+
+      $data = compact('phone', 'quotes', 'faults', 'countries');
+
+      return view('admin.inventory.pricing', array_merge($data, $data));
 
     }
 
@@ -39,8 +44,13 @@ class AdminQuotesController extends Controller
 
       $this->validate(request(), [
         'price' => 'required|numeric',
-        'country_code' => 'required'
+        'country_id' => 'required|not_in:0',
+        'fault_id'=> 'required|not_in:0'
       ]);
+
+
+      //delete existing quote..
+      $test = Quote::deleteExisting(request()->country_id, request()->fault_id, request()->phone_id);
 
       Quote::create(request()->all());
 

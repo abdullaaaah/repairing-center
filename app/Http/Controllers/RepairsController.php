@@ -20,6 +20,10 @@ use \App\Fault;
 
 use \App\Phone;
 
+use \App\Country;
+
+use \App\City;
+
 
 class RepairsController extends Controller
 {
@@ -60,18 +64,22 @@ class RepairsController extends Controller
 
   }
 
-  public function selectPhone($fault, PhoneMake $brand)
+  public function selectPhone($fault_id, PhoneMake $brand)
   {
 
-    $countries = \App\Country::all();
+    $countries = Country::all();
 
     $phones = $brand->phones;
 
     $phones = array_filter(iterator_to_array($phones), function($phone) {
-      if( count($phone->quotes) >= 2 ){
+      if( count($phone->quotes) ){
         return true;
       }
     });
+
+    $phones = Phone::whereQuoteSet($fault_id);
+
+    $fault = $fault_id; //fornow
 
     $data = compact('phones', 'countries', 'fault');
 
@@ -112,12 +120,13 @@ class RepairsController extends Controller
   public function create($fault_id, Phone $phone)
   {
 
-    $country_code = session('country_id') == 1 ? 'UK' : 'UAE';
+    $country_id = session('country_id');
 
     $amount = Quote::where([
 
     ['phone_id', '=', session('phone_id')],
-    ['country_code', '=', $country_code]
+    ['country_id', '=', $country_id],
+    ['fault_id', '=', $fault_id]
 
     ])->get()->first();
 
@@ -128,9 +137,9 @@ class RepairsController extends Controller
       dd("No price set for this phone");
     }
 
-    $amount = \App\Quote::formatQuote($amount->country_code, $amount->price);
+    $amount = $amount->formatQuoteNew($amount->country_id, $amount->price);
 
-    $city = \App\City::find(session('city_id'));
+    $city = City::find(session('city_id'));
 
     $payment_methods = [];
 
@@ -149,7 +158,7 @@ class RepairsController extends Controller
     $phone_country_code = session('country_id') == 1 ? '+44' : '+971';
 
 
-    $data = compact('amount','payment_methods', 'amount_id', 'phone_country_code', 'country_code', 'fault_id');
+    $data = compact('amount','payment_methods', 'amount_id', 'phone_country_code', 'country_id', 'fault_id');
 
     $params = [
 
@@ -254,7 +263,7 @@ class RepairsController extends Controller
 
     $last_stat = $trackings->last()->status;
 
-    $amount = \App\Quote::formatQuote($repair->quote->country_code, $repair->quote->price);
+    $amount = \App\Quote::formatQuoteNew($repair->quote->country_id, $repair->quote->price);
 
     $is_paid = $repair->payment_id ? true : false;
 
