@@ -63,7 +63,7 @@
               <strong>Amount due:</strong> {{$amount}}
             </p>
 
-            <button type="submit" class="btn btn-primary ">PAY WITH PAYPAL</button>
+            <button type="submit" class="btn btn-primary " style="margin-bottom:20px;">PAY WITH PAYPAL</button>
 
             {!! Form::close() !!}
 
