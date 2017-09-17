@@ -19,7 +19,7 @@ class PaymentsController extends Controller
 
   $this->_apiContext->setConfig(array(
   'mode' => 'live',
-  //'service.EndPoint' => 'https://api.sandbox.paypal.com',
+  'service.EndPoint' => 'https://api.paypal.com',
   'http.ConnectionTimeOut' => 30,
   'log.LogEnabled' => true,
   'log.FileName' => storage_path('logs/paypal.log'),
