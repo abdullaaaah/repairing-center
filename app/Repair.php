@@ -150,6 +150,14 @@ class Repair extends Model
 
     }
 
+    public function isRepairCompleted_2()
+    {
+      if($this->is_completed)
+      {
+        return true;
+      }
+    }
+
     public static function isRepairRejected($repair)
     {
 

@@ -48,7 +48,7 @@
 
       <h4>Payment</h4>
 
-      @if( $last_stat > 7 )
+      @if( $repair->isRepairCompleted_2() )
 
         @if($repair->payment_method == "paypal")
           @if( !$is_paid )
