@@ -263,7 +263,7 @@ class RepairsController extends Controller
 
     $last_stat = $trackings->last()->status;
 
-    $amount = \App\Quote::formatQuoteNew($repair->quote->country_id, $repair->quote->price);
+    $amount = $repair->quote->formatQuoteNew($repair->quote->country_id, $repair->quote->price);
 
     $is_paid = $repair->payment_id ? true : false;
 
