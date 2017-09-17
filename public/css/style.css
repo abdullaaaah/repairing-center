@@ -490,7 +490,7 @@ form select
 
 .banner-top div {
   padding-bottom:5px;
-  color:white;
+  color:white !important;
   border-bottom:1px solid lightblue;
   display: block;
   padding-left:2px;
