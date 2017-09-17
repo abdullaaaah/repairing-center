@@ -14,8 +14,11 @@ class Variation extends Model
 
 
   public $timestamps = false;
-  protected $fillable = ['phone_id', 'color', 'capacity'];
+  protected $fillable = ['phone_id', 'color'];
 
+  protected $attributes = [
+        'capacity' => 0
+      ];
 
   /**
    * The attributes that should be mutated to dates.

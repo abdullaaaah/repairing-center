@@ -16,11 +16,11 @@ class PhoneMake extends Model
 
   }
 
-  public static function findByName($name)
+  /*public static function findByName($name)
   {
 
     return static::where('phone_model', '=', $name)->first()->id;
 
-  }
+  }*/
 
 }

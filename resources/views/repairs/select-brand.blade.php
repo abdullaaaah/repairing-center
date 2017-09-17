@@ -79,27 +79,6 @@
 
   <div style="margin-top:40px;"></div>
 
-<!--
-
-  <div class="row phone-makes">
-
-    <div class="col-sm-6">
-
-      <a href="{{route('select-phone', [$fault->id, \App\PhoneMake::findByName('sony')] )}}"><div class="phone-makes-box">SONY
-        <img class="img-responsive img-custom" src="\img\sony.png" />
-      </div></a>
-
-    </div>
-
-    <div class="col-sm-6">
-
-      <a href="/contact"><div class="phone-makes-box">OTHERS
-        <img class="img-responsive img-custom" src="\img\more.png" />
-      </div></a>
-
-    </div>
-
-  </div>-->
 
 </div>
 

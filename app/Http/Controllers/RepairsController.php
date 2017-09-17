@@ -77,7 +77,7 @@ class RepairsController extends Controller
       }
     });
 
-    $phones = Phone::whereQuoteSet($fault_id);
+    $phones = Phone::whereQuoteSet($fault_id, $brand->id);
 
     $fault = $fault_id; //fornow
 

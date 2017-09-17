@@ -103,10 +103,10 @@ class Phone extends Model
 
   }
 
-  public static function whereQuoteSet($fault_id)
+  public static function whereQuoteSet($fault_id, $brand_id)
   {
 
-    $phones = array_filter( iterator_to_array( self::all() ), function($phone) use ($fault_id) {
+    $phones = array_filter( iterator_to_array( self::where('phone_model_id', '=', $brand_id)->get() ), function($phone) use ($fault_id) {
 
       $stmt = count($phone->quotes->where('fault_id', '=', $fault_id));
 
