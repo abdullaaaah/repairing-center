@@ -216,7 +216,8 @@ class Repair extends Model
 
     public function getPaymentAmount()
     {
-      return Quote::formatQuote($this->quote->country_code, $this->quote->price);
+      $quote = Quote::whereRaw('id = ' . $this->quote_id)->get()->first();
+      return $quote->formatQuoteNew($quote->country_id, $quote->price);
     }
 
     public function isPaid()
