@@ -14,6 +14,7 @@
     Client has been notified to complete payment if they chose paypal.
   </div>
 
+
     @if($repair->isPaymentDue())
 
     <div class="alert alert-danger">
@@ -53,6 +54,83 @@
       </div>
 
     @endif
+
+    <div class="row">
+      <div class="col-md-4">
+
+        <div class="form-group">
+          <button type="button" class="btn btn-danger" style="width:100%" data-toggle="modal" data-target="#trackingStatusModal"><i class="fa fa-truck" aria-hidden="true"></i> Tracking Info</button>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="trackingStatusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update tracking information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <p>
+                  Current status: <br /> <strong>{{ $repair->getTrackingStatus() }}</strong>
+                </p>
+
+                <form method="POST" action="/admin/trackings">
+
+                {{csrf_field()}}
+
+                <input type="hidden" name="repair_id" value="{{$repair->id}}"/>
+
+                <div class='form-group'>
+
+                  <label for="status">Select a tracking status.</label>
+
+                  <select name="status" class="form-control" required>
+                  @for($i = 2; $i < count($trackingStatuses) + 1; $i++ )
+                  <option value="{{$i}}">{{$trackingStatuses[$i]}}</option>
+                  @endfor
+                  </select>
+                </div>
+
+                <p>
+                  Tracking details will only save if "In dispatch" is selected.
+                </p>
+
+                <div class='form-group'>
+
+                  <label for="tracking_num">Tracking # (if-any)</label>
+                  <input type="text" name="track_num" value="{{$repair->getTrackingNum()}}" class="form-control" />
+
+                </div>
+
+                <div class='form-group'>
+
+                  <label for="tracking_num">Tracking Carrier (if-any)</label>
+                  <input type="text" name="track_carrier" value="{{$repair->getTrackingCarrier()}}" class="form-control" />
+
+                </div>
+
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+
+                </form>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
 
   @elseif( !\App\Repair::isRepairAccepted($repair) )
 
