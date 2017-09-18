@@ -21,7 +21,13 @@
           </div>
         </div>
 
-        <p class="lead constrain-width mt-4" style="display:none;" id="price-p"><strong style="font-weight:900"><i class="fa fa-info-circle" aria-hidden="true"></i> The best available quote for your repair is {{$amount}}</strong>, <em>We assure you the parts being used for your repair are the highest quality and tested by our professional team of technicians.</em></p>
+        <p class="lead constrain-width mt-4" style="display:none;" id="price-p"><span style="font-weight:400 !important"><i class="fa fa-info-circle" aria-hidden="true"></i> The best available quote for your device is<br />
+
+          <strong style="font-weight:900; color:#179EED; font-size:1.5em;">{{$amount}}</strong><br />
+
+          <span style="font-size:1.5em; color:#179EED">No fix No Charges</span>
+
+        </span></em></p>
         <div class="divider"></div>
       </div>
 

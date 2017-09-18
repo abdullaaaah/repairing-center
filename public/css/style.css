@@ -532,6 +532,14 @@ form select
   .banner-top{
     text-align: center;
   }
+
+    section.header-section.text-center h2 {
+    font-size:2.2em;
+  }
+
+  p.lead.constrain-width.mt-4.constrain-width {
+    padding-top:40px;
+  }
 }
 
 
@@ -551,5 +559,9 @@ form select
   section.header-section.text-center {
     height:250px;
     padding-top:50px
+  }
+
+  section.header-section.text-center h2 {
+    font-size:2em;
   }
 }
