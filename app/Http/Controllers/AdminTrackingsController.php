@@ -21,11 +21,16 @@ class AdminTrackingsController extends Controller
 
       $tracking = Tracking::create(request()->all());
 
-      if($tracking->status == 8)
+      if($tracking->status == 9) // if it is sent for dispatch
       {
         $tracking->setTrackingDetails($tracking->repair_id, request()->track_num, request()->track_carrier);
       } else {
         $tracking->setTrackingDetails($tracking->repair_id, null, null);
+      }
+
+      if($tracking->status == 8)
+      {
+        //mail..
       }
 
       return redirect('/admin/manage/repair/' . request()->repair_id);

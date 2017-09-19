@@ -149,8 +149,6 @@ class AdminRepairsController extends Controller
 
       RepairTiming::finalize($repair->id);
 
-      //mail
-
       return redirect(route('admin-show-repair', $repair->id));
     }
 

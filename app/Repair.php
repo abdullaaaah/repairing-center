@@ -367,4 +367,14 @@ class Repair extends Model
     {
       return strtoupper($this->contact_postal_code);
     }
+
+
+    public function isRepairReady()
+    {
+      if($this->trackings->last()->status == 8 )
+      {
+        return true;
+      }
+    }
+
 }

@@ -48,7 +48,7 @@
 
       <h4>Payment</h4>
 
-      @if( $repair->isRepairCompleted_2() )
+      @if( $repair->isRepairReady() )
 
         @if($repair->payment_method == "paypal")
           @if( !$is_paid )
@@ -66,6 +66,10 @@
             <button type="submit" class="btn btn-primary " style="margin-bottom:20px;">PAY WITH PAYPAL</button>
 
             {!! Form::close() !!}
+
+            <p style="margin-bottom:80px;">
+              Once you complete the payment, we will deliver your phone to you.
+            </p>
 
           @else
 

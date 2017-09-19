@@ -18,8 +18,9 @@ class Tracking extends Model
     5 => "Waiting for parts",
     6 => "Parts recieved",
     7 => "Testing QC",
-    8 => "In dispatch to your location",
-    9 => "Delivered"
+    8 => "Ready for dispatch",
+    9 => "In dispatch to your location",
+    10 => "Delivered"
 
   ];
 
