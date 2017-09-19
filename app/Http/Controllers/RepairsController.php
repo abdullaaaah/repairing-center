@@ -49,7 +49,7 @@ class RepairsController extends Controller
   public function selectBrand(Fault $fault)
   {
 
-    $brands = PhoneMake::all();
+    $brands = PhoneMake::where('is_disabled', '=', 0)->get();
 
     $data = compact('fault', 'brands');
 

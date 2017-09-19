@@ -50,4 +50,22 @@ class PhoneMakesController extends Controller
       return redirect(route('create-brand'));
     }
 
+    public function disable(\App\PhoneMake $brand)
+    {
+
+      $brand->is_disabled = true;
+      $brand->save();
+
+      return redirect(route('create-brand'));
+
+    }
+
+    public function enable(\App\PhoneMake $brand)
+    {
+      $brand->is_disabled = false;
+      $brand->save();
+
+      return redirect(route('create-brand'));
+    }
+
 }

@@ -24,8 +24,13 @@
         </th>
 
         <th>
+          Disable
+        </th>
+
+        <th>
           Delete
         </th>
+
       </tr>
     </thead>
 
@@ -50,6 +55,31 @@
           </td>
         </form>
 
+        <td>
+
+          @if(!$brand->is_disabled)
+
+          <form method="post" action="{{route('disable-brand', $brand->id)}}">
+            {{csrf_field()}}
+
+            {{method_field("PATCH")}}
+
+            <button class="btn btn-warning" type="submit">Disable</button>
+          </form>
+
+          @else
+
+          <form method="post" action="{{route('enable-brand', $brand->id)}}">
+            {{csrf_field()}}
+
+            {{method_field("PATCH")}}
+
+            <button class="btn btn-success" type="submit">Enable</button>
+          </form>
+
+
+          @endif
+        </td>
 
         <form method="post" action="{{route('delete-brand', $brand->id)}}">
           {{csrf_field()}}
@@ -80,7 +110,10 @@
         </form>
 
         <td>
-          <button class="btn btn-danger" disabled>Delete</button>
+
+        </td>
+
+        <td>
         </td>
       </tr>
 

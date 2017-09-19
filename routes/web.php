@@ -201,6 +201,11 @@ Route::patch('/admin/brands/{brand}', 'PhoneMakesController@edit')->name('edit-b
 
 Route::delete('/admin/brands/{brand}', 'PhoneMakesController@delete')->name('delete-brand');
 
+Route::patch('/admin/brands/disable/{brand}', 'PhoneMakesController@disable')->name('disable-brand');
+
+Route::patch('/admin/brands/enable/{brand}', 'PhoneMakesController@enable')->name('enable-brand');
+
+
 //payment
 
 Route::get('/admin/payments/paypal', 'AdminPaymentsController@show')->name('show-payments');
